@@ -1,0 +1,114 @@
+\documentclass[]{article}
+\usepackage{amsmath}\usepackage{amsfonts}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{prop}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\usepackage[margin=1in,footskip=0.25in]{geometry}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\usepackage[final]{graphicx}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\newcommand{\indep}{\perp \!\!\! \perp}
+% \usepackage{wrapfig}
+\graphicspath{{.}}
+% \usepackage{fancyvrb}
+
+%%
+%% Julia definition (c) 2014 Jubobs
+%%
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage[usenames,dvipsnames]{xcolor}
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},%
+   sensitive=true,%
+   alsoother={$},%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
+
+\linespread{1}
+\usepackage[fontsize=12pt]{fontsize}
+\begin{document}
+\numberwithin{equation}{subsection}
+\begin{center}
+    AMATH 514 SPRING 2022 HONGDA LI HW3
+\end{center}
+\section{Problem 2.16}
+    \begin{prop}
+        \begin{align}
+            (\exists x \ge \mathbf 0: Ax = \mathbf 0 )
+            \iff 
+            (y^TA \ge \mathbf 0 \implies y^TA = \mathbf 0)
+        \end{align}
+    \end{prop}
+    \noindent
+    Introduce the lemma: 
+    \begin{lemma}
+        if $x >\mathbf 0$, and $y\ge \mathbf 0$, then $\langle x, y\rangle \ge \mathbf 0$. 
+    \end{lemma}
+    \begin{proof}[Lemma 1]
+        This is true because $\langle x, y\rangle = \sum_{i = 1}^{n}x_i y_i \ge \mathbf 0$, we are just multiplying each of the inequality by a non-negative number and then sum then all up. 
+    \end{proof}
+    \begin{proof}[Proposition 1]
+        Proof of sufficiency $\implies$: 
+        \begin{align}
+            &\text{choose }x \text{ s.t: } Ax = \mathbf 0 ,\; x > \mathbf 0
+            \\
+            & y^TA \ge\mathbf 0 \wedge y^TAx = \mathbf 0 \implies y^TA = \mathbf 0
+        \end{align}
+        $y^TA \ge \mathbf 0$ and by $y^TAx = 0, x\ge 0$, we know that $y^TA = \mathbf 0$, because you can't sum up positive number and still get zero. 
+        \par
+        Proof of neccessity $\impliedby$: we will use prove by contradiction, we assume that $y^TA\ge \mathbf 0$ and $y^TA = \mathbf 0$, and for contradiction we assume $\not\exists x > \mathbf 0: Ax = \mathbf 0$. 
+        \begin{align}
+            & y^TA = \mathbf 0 \implies y^TAx = \mathbf 0 \quad \forall x
+            \\
+            &\hspace{1.1em}
+            \exists x > \mathbf 0: \underbrace{y^TA}_{\ge \mathbf 0} \underbrace{x}_{x > 0} = \mathbf 0
+            \\
+            & \text{Contradicts Lemma 1}
+        \end{align}
+
+    \end{proof}
+
+\section{Problem 2.21}
+    \begin{prop}
+        If the polytope $P:= \{A| Ax \le b\}\neq \emptyset$, prove $x^+: x^+ = \max \{c^Tx | Ax \le b\}$ is attained by an vertex $x^+\in P$. 
+    \end{prop}
+    \par
+    Here is the approach for this problem. A polytope is closed therefore the objective value is going to be bounded. Next, if supremum of the objective exists then there is a point inside of the closed polytope $p$ that attains it. 
+    \par
+    To show that the pint $x^+$ is a vertex, we assume it's not, then we show that either we can wiggle it around to improve $\langle c, x\rangle$, or we can just wiggle it so it becomes an vertex in $P$ eventually, hence it has to be a vertex. 
+
+\section*{2.26}
+
+\section*{2.27}
+
+
+\end{document}
