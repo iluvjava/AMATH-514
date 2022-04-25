@@ -1,0 +1,91 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{hyperref}
+% \usepackage{minted}
+% Basic Type Settings ----------------------------------------------------------
+\usepackage[margin=1in,footskip=0.25in]{geometry}
+\linespread{1}  % double spaced or single spaced
+\usepackage[fontsize=12pt]{fontsize}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}       % Theorem counter global 
+\newtheorem{prop}{Proposition}[section]  % proposition counter is section
+\newtheorem{lemma}{Lemma}[subsection]  % lemma counter is subsection
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}[subsection]
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\usepackage[final]{graphicx}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\usepackage{wrapfig}
+\graphicspath{{.}}
+\usepackage{fancyvrb}
+
+%%
+%% Julia definition (c) 2014 Jubobs
+%%
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage[usenames,dvipsnames]{xcolor}
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},%
+   sensitive=true,%
+   alsoother={$},%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
+
+
+
+\begin{document}
+\numberwithin{equation}{subsection}
+\section{Theorems from Classes}
+
+\section{Problem 3.3}
+    \begin{prop}
+        The number of non-zero elements you can put into a matrix such that all columns and row of the matrix has no more than 2 elements equals to the minimal number of lines (going horizontally or vertically) on the matrix such that it covers all the non-zero elements. 
+    \end{prop}
+    \begin{proof}
+        Suppose that the matrix $A$ is a $m\times n$ matrix. We firstly need to represent the non-zero elements in the matrix $A$ as edges in the bi-partite graph, and the a row or a column of the matrix as a vertex that in that bipartite graph that covers some of the edges in the bipartite graph. 
+        \par
+        Define bi-partite graph $G = (V \dot{\cup}V', E)$, where $\dot{\cup}$ is the disjoint union of 2 sets, and we establish notations: 
+        \begin{align}
+            & V := \{v_i\}_{i = 1}^{n}
+            \\
+            & V' := \{v_j'\}_{j = 1}^{m}
+        \end{align}
+        Each set of the bipartite graph represents the row index and column index of the matrix. Then, we set the correspondence of a non-zero element in the matrix as an edge going between $V', V$, like this: 
+        \begin{align}
+            
+        \end{align}
+    \end{proof}
+\section{Problem 3.5}
+\section{Problem 3.11}
+\section{Problem 3.17}
+\end{document}
