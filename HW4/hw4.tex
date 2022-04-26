@@ -65,16 +65,24 @@
 
 \begin{document}
 \numberwithin{equation}{subsection}
+\section{Notations}
+Assuming a nondirected graph $G = (V, E)$. We define the following notations: 
+\begin{itemize}
+    \item [1.] $\delta(v)$: denotes the set of edges that are incident to the vertex $V$, if $\delta(V)$ is a set of vertices from a graph, then it's just the union of all the edges $\{u, v\}$ such that $u\in V, v\not\in V$. 
+    \item [2.] $\text{ngh}(v)$: denotes all the vertices that are neighbours to the vertex $v$, it's $\{u\in V: \{u, v\} \in E\}$, sometimes, we have $\text{ngh}(W)$ where $W$ is a set of vertices, then it's all vertices outside of $W$ that is neighbouring to the set, or $\{u\in V: \{u, v\}, v\in W, u \not\in W\}$
+\end{itemize}
 \section{Theorems from Classes}
-
+    \begin{theorem}[Konig]\label{theorem:konig}
+        On a bipartite graph the maximum matching equals to the minimum vertex cover, in term of the cardinality of the sets of all edges in matching and the vertices in vertex cover.  
+    \end{theorem}
 \section{Problem 3.3}
     \begin{prop}
         The number of non-zero elements you can put into a matrix such that all columns and row of the matrix has no more than 2 elements equals to the minimal number of lines (going horizontally or vertically) on the matrix such that it covers all the non-zero elements. 
     \end{prop}
     \begin{proof}
-        Suppose that the matrix $A$ is a $m\times n$ matrix. We firstly need to represent the non-zero elements in the matrix $A$ as edges in the bi-partite graph, and the a row or a column of the matrix as a vertex that in that bipartite graph that covers some of the edges in the bipartite graph. 
+        Suppose that the matrix $A$ is a $m\times n$ matrix. We firstly need to represent the non-zero elements in the matrix $A$ as edges in the bipartite graph, and the a row or a column of the matrix as a vertex that in that bipartite graph that covers some of the edges in the bipartite graph. 
         \par
-        Define bi-partite graph $G = (V \dot{\cup}V', E)$, where $\dot{\cup}$ is the disjoint union of 2 sets, and we establish notations: 
+        Define bipartite graph $G = (V \dot{\cup}V', E)$, where $\dot{\cup}$ is the disjoint union of 2 sets, and we establish notations: 
         \begin{align}
             & V := \{v_i\}_{i = 1}^{n}
             \\
@@ -82,10 +90,131 @@
         \end{align}
         Each set of the bipartite graph represents the row index and column index of the matrix. Then, we set the correspondence of a non-zero element in the matrix as an edge going between $V', V$, like this: 
         \begin{align}
-            
+            a_{i, j} \neq 0 \iff \{v_i, v_j'\} \in E
         \end{align}
+        A line that covers a row $i$, or a column $j$ of non zero elements in $A$ is all the edges incident to the vertex $v_i$, or $v_j$ on the bipartite graph. Goes like this: 
+        \begin{align}
+            & \delta(v_i) = \{\{v_i, v_k'\}: k\in [n] \wedge a_{i, j} \neq 0\}
+            \\
+            & \delta(v_j) = \{\{v_k, v_j\}: k \in [m] \wedge a_{k, j} \neq 0\}
+        \end{align}
+        By Konig theorem, the maximum matching in $G$ equals to the minimum vertex cover. By definition of a Maching: 
+        \begin{align}
+            &\{v_{i}, v_{j}'\} \in E, \{v_{i^*}, v_{j^*}'\} \in E \text{ where } i\neq i^{*}, j \neq j^{*} 
+            \\
+            \implies & 
+            v_i \neq v_{i^*} \wedge v_j \neq v_{j^*}
+            \equiv \neg (v_i = v_{i^*} \vee v_j = v_{j^*})
+        \end{align}
+        Therefore, any matching in the graph $G$, would corresponds to the fact that any pair of non-zero element: $a_{i, j}, a_{i^*, j^*}$ doesn't share the same row, or column. 
+        \par
+        At the same time, suppose that $F$ is a cover on the graph $G$, then all the edges are covered. Then the number of vertices are lines going over row of $A$, if they are incident to a vertex from $V$, or lines going over column of $A$ if they are incident to a vertex from $v'$. 
+        \begin{align}
+            & \{v_i, v_j'\} \in E \implies  v_i \in F \vee v_j' \in F
+            \\
+            & \equiv (\text{a Vertical line going over j th column}) \text{OR}
+            \\
+            & (\text{Horizontal line going over i th row})
+        \end{align}
+        
+        Konig theorem asserts that the MINIMUM number of these vertices are the same and the MAXIMUM number of edges in the Maching. So the Minimum number of lines we need to draw to cover the maximum number of none zero elements without sharing a column or row is the same. 
+
+        
     \end{proof}
 \section{Problem 3.5}
+    \begin{definition}
+        A SDR(System of Distinct Representative) is a relation between $X$, a finite set and $\mathcal A$, a family of all the subsets of $X$. SDR is possible if we can choose a distinct element from each $A_i\subseteq X$ such that it uniquely represent each set in $\mathcal I$. Or, mathematically, there exists a set $Y\subseteq X$ and a bijection $f: [n]\mapsto Y$ such that $f(i) \in A_i$ for all $i\in [n]$. 
+
+    \end{definition}
+    \begin{prop}
+        Let $\mathcal A = (A_1, A_2, \cdots, A_n)$ be a family of subsets of some finite set $X$, then $\mathcal A$ has SDR if and only if
+        \begin{align}
+            \left|
+                \bigcup_{i \in I}A_i
+            \right|
+            \ge |I| \quad\forall I \subseteq [n]
+        \end{align}
+    \end{prop}
+    \begin{proof}
+        We use Hall's theorem to prove SDR representation conditions. The proof for Hall's Theorem is below! To use Hall's theorem, we convert the problem into a matching on a bipartite graph. 
+        \\[1.1em]
+        We consider vertex set $V = [n]$, and $U = X$, then an edge $\{i, x\} \in E$ iff $x\in A_i$, and the bipartite graph is $G = (V\dot\cup U, E)$
+        \begin{align}
+            & \left|
+                \bigcup_{i\in I} A_i
+            \right| \ge |I| 
+            \quad
+            \forall I \in [n]
+            \\
+            & \left|
+                \bigcup_{i\in I} \{x: x\in A_i\}
+            \right| \ge |I| 
+            \quad
+            \forall I \in [n]
+            \\
+            & x\in A_i \implies \{x, i\}\in E \implies x \in \text{ngh}(i)
+            \\
+            & \implies \{x: x\in A_i\} = \text{ngh}(i)
+            \\
+            & \bigcup_{i \in I} \{x: x\in A_i\} = \text{ngh}(I)
+            \\
+            & |\text{ngh}(I)|\ge |I|\quad \forall i \in [n]
+        \end{align}
+        The third line is saying that if $x\in A_i$,then it's an edge in the bipartite graph, and if that is the case, the union of all $x\in A_i$ for all $i\in I$ is all the neighbouring vertices to the set $I\subseteq [n]$. 
+        \\[1.1em]
+        Which is exactly what we proved below, for the Hall's Theorem. By Hall's theorem, a perfect matching $M$ is possible and it will saturate all the vertices in $[n]$, meaning that for every $i\in [n]$, there is an edge in the matching $M$ that covers it only once. And by the token, the edges in the matching are the bijective function, say $f$, going from $[n]$ to $Y\subset X$ where, each element $i\in [n]$ maps to a unique element in $Y$, a subset of $X$, in such at way that $x\in A_i, i\in [n], \{x, i\}\in M$. 
+    \end{proof}
+    \begin{theorem}[Hall's Theorem]
+        Let $G = (V\dot{\cup} U, E)$ be a bipartite graph, and $V, U$ are the partitions of vertices of the 2 sides, then a saturating matching (A matching that includes all element in $V$, or $U$) is possible if and only if: 
+        \begin{align}
+            \forall\; W \subseteq V: 
+            |W| \le |\text{ngh}(W)| \iff 
+            \text{Saturating Matching Possible}
+        \end{align}
+    \end{theorem}
+    \begin{proof}
+        WLOG, let $|V|\le |U|$, then if the matching $M$ is saturating, we have $|M| = |V|$. 
+        \\[1.1em]
+        Firstly we proof $\impliedby$ direction of the statement by contrapositive. Therefore, we wish to prove that if $\exists W\subseteq V$ such that $|W| \le |\text{ngh}(W)|$, then a Saturating Matching is impossible. 
+        \par
+        Let $W$ be such a subset in $V$, then: 
+        \begin{align}
+            & \text{ngh}(W)\subseteq U
+        \end{align}
+        Because the graph is bipartite. Let $M$ be a matching of $G$, and we consider a subset of edges $e\in M$ where $e = {w, u}$ and $w \in W$, the violating subset. The, not all $w \in W$ can be matched, because it's neighouring set, $\text{ngh}(W)$ has cardinality that is less. Therefore, the matching cannot be saturating, there is at least one vertex in $W$ that is not covered by $M$. 
+        \\[1.1em]
+        The proof for $\implies$ is inductive. We consider a subest $V'\subseteq V$ and the subgraph $G=(V'\cup U, E)$ and try adding a new vertex $v^+$, while letting the following remains true: 
+        \begin{align}
+            & \forall\; W\subseteq V': |W| \le |\text{ngh}(W)|
+            \\
+            & \forall\;  W\subseteq (V'\cup \{v^+\}): |W| \le |\text{ngh}(W)|
+        \end{align}
+        The first statement is the the Hypothesis holds for the subgraph $V$, and the second statement show that it still holds as we add a vertex, then we wish to prove that a Saturating Matching on $V'\cup \{v^+\}$ is still possible. 
+        \\[1.1em]
+        For the neighbours of the new comer $v^+$, they are only 2 cases, either it's not a subset of $\text{ngh}(V')$, in this case, a matching edge can be added trivially, just take the $u^+\in \text{ngh}(v^+), u^+\not\in\text{ngh}(V')$. Next, we consider the case where $\text{ngh}(v^+)\subseteq \text{ngh}(V')$; let $M$ be a matching between $V'$ and $\text{ngh}(V')$. Consier the set of vertices in $V'$ that is sharing neighbours with $v^+$: 
+        \begin{align}
+            & V'' := \{v\in V': \text{ngh}(v)\cup \text{ngh}(v^+)\neq \emptyset\}
+            \\
+            & V''\subseteq V' \implies 
+            |V''|\le |\text{ngh}(V'')|
+            \\
+            & V''\subseteq V' \implies 
+            |V''\cup\{v^+\}|\le |\text{ngh}(V''\cup\{v^+\})|
+        \end{align}
+        The second and the third line is the inductive hypothesis. recall that by definition $\text{ngh}(V'') = \text{ngh}(V''\cup \{v^+\})$, therefore: 
+        \begin{align}
+            & |V''\cup\{v^+\}|\le |\text{ngh}(V''\cup\{v^+\})|
+            \\
+            & |V''| \le |V''\cup\{v^+\}|\le |\text{ngh}(V'')|
+            \\
+            & |V''| < |\text{ngh}(V'')|
+        \end{align}
+        The vertices shareing the same neighbour with $v^+$, their neighbours has one spot of vacancy, as shown by the strict inequality above. Let $u''$ be that vertex in $\text{nhg}(V'')$ such that $u''\not\in M$. Then we have a new matching: $M\cup \{u''\}$ which cover $v^+$. 
+        \\[1.1em]
+        Inductively consider redefineing $V':= V'\cup \{v^+\}$ and $M:= M\cup \{v+^,u''\}$, and each time, and the conditions hold inductively, then after adding all such vertices $v^+$, we will end up with $V' = V$. And since we can find a matching that covers $v^+$ without deleting any pre-existing edges in the matching, the matching is saturated; all vertices in $V$ is covered by the matching. 
+    \end{proof}
 \section{Problem 3.11}
+    
 \section{Problem 3.17}
+
 \end{document}
