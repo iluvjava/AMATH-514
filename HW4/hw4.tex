@@ -164,7 +164,7 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
         \\[1.1em]
         Which is exactly what we proved below, for the Hall's Theorem. By Hall's theorem, a perfect matching $M$ is possible and it will saturate all the vertices in $[n]$, meaning that for every $i\in [n]$, there is an edge in the matching $M$ that covers it only once. And by the token, the edges in the matching are the bijective function, say $f$, going from $[n]$ to $Y\subset X$ where, each element $i\in [n]$ maps to a unique element in $Y$, a subset of $X$, in such at way that $x\in A_i, i\in [n], \{x, i\}\in M$. 
     \end{proof}
-    \begin{theorem}[Hall's Theorem]
+    \begin{theorem}[Hall's Theorem]\label{theorem:Hall}
         Let $G = (V\dot{\cup} U, E)$ be a bipartite graph, and $V, U$ are the partitions of vertices of the 2 sides, then a saturating matching (A matching that includes all element in $V$, or $U$) is possible if and only if: 
         \begin{align}
             \forall\; W \subseteq V: 
@@ -211,10 +211,48 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
         \end{align}
         The vertices shareing the same neighbour with $v^+$, their neighbours has one spot of vacancy, as shown by the strict inequality above. Let $u''$ be that vertex in $\text{nhg}(V'')$ such that $u''\not\in M$. Then we have a new matching: $M\cup \{u''\}$ which cover $v^+$. 
         \\[1.1em]
-        Inductively consider redefineing $V':= V'\cup \{v^+\}$ and $M:= M\cup \{v+^,u''\}$, and each time, and the conditions hold inductively, then after adding all such vertices $v^+$, we will end up with $V' = V$. And since we can find a matching that covers $v^+$ without deleting any pre-existing edges in the matching, the matching is saturated; all vertices in $V$ is covered by the matching. 
+        Inductively consider redefineing $V':= V'\cup \{v^+\}$ and $M:= M\cup \{\{v^+,u''\}\}$, and each time, and the conditions hold inductively, then after adding all such vertices $v^+$, we will end up with $V' = V$. And since we can find a matching that covers $v^+$ without deleting any pre-existing edges in the matching, the matching is saturated; all vertices in $V$ is covered by the matching. 
     \end{proof}
 \section{Problem 3.11}
-    
+    \begin{definition}[Doubly Stochastic matrix]
+        A doubly stochastic matrix is a nonegative matrix whose all colums and row sums up to exactly 1. 
+    \end{definition}
+    Please notices that it's implied that the matrix is a square matrix. Because all the element must sum up to how many number of rows there are, and how many numbers of columns they are, and that means the number of rows and columns are the same for a doubly stochastic matrix. 
+    \subsection{3.11(i)}
+        \begin{prop}
+            For each double stochastic matrix, there exists a way you can permute the rows such that the matrix after such permuation will have all nonzero elements on the diagonal. 
+        \end{prop}
+        The idea for the proof is to create a correspondence of the nonzero elements in the matrices as edges on a bipartite graph with $G = (V\dot\cup U, E)$, and rows and columns of the matrix corresponds to the vertex cover of some vertices in the set $U, V$. Finally, to prove the proposition, we show that if the matrix is doubly stochastic, \hyperref[theorem:Hall]{Hall's Theorem} must satisfy the bipartite graph, allowing for a perfect matching. 
+        \begin{lemma}
+            Let $G = (V\dot\cup U, E)$ be a bipartite graph G, suppose the correspondence between the nonzero elements in the $n\times n$ square matrix $A$ and the edges in the bipartite graph defined as: 
+            \begin{align}
+                a_{i, j}\neq 0 \iff {v_i, u_j} \in E
+            \end{align}
+            If a perfect matching eixsts on the bipartite graph $G$, then it's possible to permuate the columns of the matrix such that the permuted matrix will have non-zero elements on the diagonal!
+        \end{lemma}
+        \begin{proof}
+            Let $M$ be a pefect matching on graph $G$, then by definition: 
+            \begin{align}
+                \forall v_i \in V \; \exists!\; u_j \in U: \{v_i, u_j\}\in M
+            \end{align}
+            Then the matching defines a permutations, if we only focuses on the indices of the vertices covered by the matching from both $U, V$ we have something like: 
+            \begin{align}
+                & \forall i\in [n] \;\exists ! j\in [n]\; : \{v_i, u_j\} \in {M}
+                \\
+                & i_1 \mapsto j_1 \\
+                & i_2 \mapsto j_2 \\ 
+                & \vdots \\ 
+                & i_n \mapsto j_n \\
+            \end{align}
+            $M\subseteq E$, then defining such a matching as $f: [n]\mapsto [n] := \{(i, j): (v_i, u_j)\in M\}$, then it's bijective and each $\{v_i, v_{f(i)}\}$ is an edge in the bipartite graph. And by the correspondence between the graph and the matrix, $a_{i, f(i)} \neq 0 \;\forall i \in [n]$. 
+        \end{proof}
+        \begin{lemma}
+            For a doubly stochastic matrix $A$, it will have to be the case that its corresponding bipartite graph (See above lemma) must have a perfect matching solution on it.
+        \end{lemma}
+        \begin{proof}
+            
+        \end{proof}
 \section{Problem 3.17}
+    
 
 \end{document}
