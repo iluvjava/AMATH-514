@@ -71,6 +71,8 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
     \item [1.] $\delta(v)$: denotes the set of edges that are incident to the vertex $V$, if $\delta(V)$ is a set of vertices from a graph, then it's just the union of all the edges $\{u, v\}$ such that $u\in V, v\not\in V$. 
     \item [2.] $\text{ngh}(v)$: denotes all the vertices that are neighbours to the vertex $v$, it's $\{u\in V: \{u, v\} \in E\}$, sometimes, we have $\text{ngh}(W)$ where $W$ is a set of vertices, then it's all vertices outside of $W$ that is neighbouring to the set, or $\{u\in V: \{u, v\}, v\in W, u \not\in W\}$
 \end{itemize}
+\newpage
+
 \section{Theorems from Classes}
     \begin{theorem}[Konig]\label{theorem:konig}
         On a bipartite graph the maximum matching equals to the minimum vertex cover, in term of the cardinality of the sets of all edges in matching and the vertices in vertex cover.  
@@ -223,11 +225,12 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             For each double stochastic matrix, there exists a way you can permute the rows such that the matrix after such permuation will have all nonzero elements on the diagonal. 
         \end{prop}
         The idea for the proof is to create a correspondence of the nonzero elements in the matrices as edges on a bipartite graph with $G = (V\dot\cup U, E)$, and rows and columns of the matrix corresponds to the vertex cover of some vertices in the set $U, V$. Finally, to prove the proposition, we show that if the matrix is doubly stochastic, \hyperref[theorem:Hall]{Hall's Theorem} must satisfy the bipartite graph, allowing for a perfect matching. 
+        \par
+        \textbf{Matrix Bipartite Correspondence}: Let $G = (V\dot\cup U, E)$ be a bipartite graph G, suppose the correspondence between the nonzero elements in the $n\times n$ square matrix $A$ and the edges in the bipartite graph defined as: 
+        \begin{align}
+            a_{i, j}\neq 0 \iff \{v_i, u_j\} \in E
+        \end{align}
         \begin{lemma}
-            Let $G = (V\dot\cup U, E)$ be a bipartite graph G, suppose the correspondence between the nonzero elements in the $n\times n$ square matrix $A$ and the edges in the bipartite graph defined as: 
-            \begin{align}
-                a_{i, j}\neq 0 \iff {v_i, u_j} \in E
-            \end{align}
             If a perfect matching eixsts on the bipartite graph $G$, then it's possible to permuate the columns of the matrix such that the permuted matrix will have non-zero elements on the diagonal!
         \end{lemma}
         \begin{proof}
@@ -250,9 +253,141 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             For a doubly stochastic matrix $A$, it will have to be the case that its corresponding bipartite graph (See above lemma) must have a perfect matching solution on it.
         \end{lemma}
         \begin{proof}
+            Observe that the set of edges incident to $v_i\in V$ are all elements on the $i$ row of matrix $A$, because $\delta(v_i) = \{\{v_i, u\}: \{v_i, u\}\in E\}$, $\{v_i, u\}$ corresponds to all $a_{i, k} \neq 0 \;\forall k\in [n]$. By a similar token the edges incident to $u_j\in U$, denoted as $\delta(u_j)$ are all the entries in column $j$ of matrix $A$. Using this, we can conclude that: 
+            \begin{align}
+                & v_i\in  V \implies \sum_{\{v_k, u_l\}\in \delta(v_i)}^{}a_{k, l} = 1
+                \\
+                & u_j\in  U \implies \sum_{\{v_k, u_l\}\in \delta(u_j)}^{}a_{k, l} = 1
+            \end{align}
+            It's applying the correspondence between edges on the bipartite graph that are incident to a single vertex $v_i$ in $V$ must be non zero entries on a single row, the $i$ th row to be precise. And all edges incident to a $u_j$ in $U$ must be on a single column of the matrix, this is by the definition of a doubly stochastic matrix. 
+            \par
+            If Hall's theorem doesn't hold, then there is a countradiction. Hall's theorem doesn't hold on the bipartite graph implies that: 
+            \begin{align}
+                \exists V'\subseteq V: 
+                    |V'| > |\text{ngh}(V')|
+            \end{align}
+            $\delta(V')$ is the set of edges that are incident to the set $V'$, all these edges are non zero element on some row $i$ such that $v_{i}\in V'$. Then, their sum must equal how many rows they occupied, which is $|V'|$, by the definition of doubly stochastic matrices. 
+            \begin{align}
+                \sum_{\{v_{i}, u_{j}\}\in \delta (V')}^{}
+                a_{i, j} = |V'|
+            \end{align}
+            Observe that, $\delta(V')$ is a subset of $\delta(\text{ngh}(V'))$, because all edges incident to $V'$, are incident to their neighbours in $U$, but their neighbours might have new neighbours that are not in $V'$. So then: 
+            \begin{align}
+                &
+                \delta(V')\subseteq \delta(\text{ngh}(V'))
+                \\&
+                \sum_{\{v_i, u_j\} \in \delta(\text{ngh}(V'))}^{}
+                    a_{i, j}
+                = |\text{ngh}(V')|
+                \\&
+                =\underbrace{\sum_{\{v_i, u_j\} \in \delta(V') }^{} 
+                a_{i, j}}_{|V'|} + 
+                \sum_{
+                    \{v_i, u_j\} \in 
+                    \delta(\text{ngh}(V'))\setminus \delta(V')}^{}
+                    a_{i, j}
+                = |\text{ngh}(V')| 
+                \\
+                & 
+                \implies |V'|\le |\text{ngh}(V')|
+            \end{align}
+            This is true because edges incident to $\text{ngh}(V')$ is a subset of vertices $U$, and they are all on some column $j$ such that $\{v_i, u_j\} \in E$, and the cardinality of $\text{ngh}(V')$ determines that all entires of such $i, j$ must sum up to the number of columns that they are in, hence the sum is $\text{ngh}(V')$. At line (5.1.14), we derive a countradiction that to our assumption, therefore, the conditions $\forall \;V' \subseteq V: |V'|\le |\text{ngh}(V')|$ must hold. 
             
         \end{proof}
+        \begin{proof}[Proposition 5.1]
+            Combining the above 2 lemmas ((lemma 5.1.1), (lemma 5.1.2)), it will be the case that for every double stochastic matrix, a perfect matching on the corresponding bipartite graph is possible because hall's theorem must apply (lemma 5.1.2), and because a perfect matching is possible, then ther is a way to permute the columns of matrix $A$ such that all diagonals on the permuted matrix are non zeros as well (lemma 5.1.1).     
+        \end{proof}
+        
+    \subsection{3.1.1(ii)}
+        Reader please observe that, for any matrix non-negative, whose row sum and columns equals to the same number, can be scaled by a positive quantity so that it's a doubly stochastic matrix, which means that poposition 5.1 is applicable for the matrix as well. 
+        \begin{prop}
+            Each doubly stochastic matrix is a convex linear combinations of permutations matrices. 
+        \end{prop}
+        \begin{proof}
+            Firstly, we need to consider an inductive process (index by $k$) that applies to a matrix $A^{(k)}\in \mathbb R^{n\times n}$ (define $A^{(0)} = A$) where each row and column of $A^{(k)}$ sums up to a number: $s^{(k)}$ (define $s^{(0)} = 1$), and $A^{(k)}$ is nonegative. 
+            \par
+            The matrix $A^{(k)}$ is a scaled doubly stochastic matrix, it's scaled by $s^{(k)}\in [0, 1]$. We denote $a_{i, j}^{(k)}$ as its element on the i row j column. We can apply proposition 5.1, giving us: 
+            \begin{align}
+                & 
+                \exists \pi: [n]\underset{\text{bijection}}{\mapsto}[n]: 
+                a^{(k)}_{i,\pi(i)}\neq 0
+                \\
+                & 
+                P^{(k)} := \begin{bmatrix}
+                    e_{\pi(1)} & e_{\pi(2)}& \cdots & e_{\pi(n)}
+                \end{bmatrix}
+            \end{align}
+            We use such permutations to define another column permutations matrix that does the permuting. Each ones in $P^{(k)}$ correponds to some non-zero elements in the matrix $A^{(k)}$ by proposition 5.1. Next, we consider a special choice of an entry in the matrix $A^{(k)}$: 
+            \begin{align}
+                & (i^{(k)}, j^{(k)}) \in \arg\min_{(i, j)\in [n]\times [n]}
+                a_{i, j}
+                \\
+                & \implies 0 \le a^{(k)}_{i^{(k)}, j^{(k)}} \le s^{(k)}
+                \\
+                \forall (i, j)\in [n]\times n: 
+                & a^{(k)}_{i, j} - a^{(k)}_{i^{(k)}, j^{(k)}} \ge 0
+                \\
+                & A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} \ge \mathbf 0_{n\times n}
+            \end{align}
+            Take notice that, either $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} = \mathbf 0_{n\times n}$, or the case that it's not a zero matrix. For one case, we go inductively, for the other case we unroll the results and represent $A$ as a convex combinations of permutation matrices. 
+            \begin{itemize}
+                \item [1.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}$. Then this matrix is still a scaled doubly stochastic matrix and its row and column sums are gonna be: 
+                \begin{align}
+                    0 & \le\forall j \in [n]: 
+                        \left(
+                            \sum_{i \in [n]}^{} 
+                            a^{k}_{i, j}
+                        \right) - a^{(k)}_{i^{(k)}, j^{(k)}} 
+                        = s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}} 
+                        \\
+                    0 & \le \forall i \in [n]: 
+                    \left(
+                        \sum_{j \in [n]}^{} 
+                        a^{k}_{i, j}
+                    \right) - a^{(k)}_{i^{(k)}, j^{(k)}} 
+                    = s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}} 
+                \end{align}
+                Remember that $p^{(k)}$ is a permutation matrix and $A^{(k)}$ is a $s^{(k)}$ scaled doubly stochastic matrix, therefore, each row and column has a unique $1$ in it. Therefore, $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}$ is still a scaled doubly stochastic matrix since it's assumed to be not equal to zero, and the scale is $s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}> 0$. Then, define the following quantities and inductively, going back to the proof at the beginning: 
+                \begin{align}
+                    & 
+                    A^{(k + 1)}:= A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}
+                    \\
+                    & s^{(k + 1)} := 1 - a^{(k)}_{i^{(k)}, j^{(k)}}
+                \end{align}
+                We then go through the prove again with $A^{(k + 1)}$. 
+                \item [2.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} = \mathbf 0_{n\times n}$, then this inductive process terminates, and we have: 
+                \begin{align}
+                    & 
+                    \underbrace{A^{(k)}}_{\mathbf 0_{n\times n}} = A^{(0)} - \sum_{m = 1}^{k - 1}
+                    a^{(m)}_{i^{(m)}, j^{(m)}}P^{(m)}
+                    \\
+                    \implies 
+                    & 
+                    \underbrace{A^{(0)}}_{:=A} = 
+                    \sum_{m = 1}^{k - 1}
+                    a^{(m)}_{i^{(m)}, j^{(m)}}P^{(m)}
+                    \\
+                    & \underbrace{s^{(k)}}_{=0} = s^{(0)} - \sum_{m = 1}^{k - 1}
+                    a^{(k)}_{i^{(k)}, j^{(k)}}
+                    \\
+                    \implies &
+                    \sum_{m = 1}^{k - 1}
+                    a^{(k)}_{i^{(k)}, j^{(k)}} = 1
+                \end{align}
+                Therefore, $A^{(0)}$, the original matrix is a convex combinations of all $P^{(m)}$ for $m = 1, \cdots, k - 1$ permutation matrices. 
+            \end{itemize}
+            Take note that this induction is going to fall through because we start with $A^{(0)}$ as a doubly stochastic matrix, and we perserved it as a scaled doubly stochastic matrix at each step of the induction, therefore it remains to be one until the matix $A^{(k)}$ becomes the zero matrix. 
+            
+            
+        \end{proof}
+        
 \section{Problem 3.17}
+    I did it by hand and eyes. 
+    \begin{center}
+        \includegraphics[width=12cm]{HW4-5.jpg}
+        \includegraphics[width=12cm]{HW4-6.jpg}
+        \includegraphics[width=12cm]{HW4-7.jpg}
+    \end{center}
     
 
 \end{document}
