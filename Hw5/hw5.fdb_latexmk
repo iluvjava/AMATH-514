@@ -1,9 +1,9 @@
 # Fdb version 3
-["pdflatex"] 1651650817 "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.pdf" "hw5" 1651650817
+["pdflatex"] 1651699142 "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.pdf" "hw5" 1651699142
   "/Users/hongdali/Desktop/repos/AMATH-514/HW5/fig1.jpeg" 1651650422 369347 79453c9b9971690cac058af861bca1b1 ""
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.aux" 1651650817 8 a94a2480d3289e625eea47cd1b285758 "pdflatex"
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.out" 0 -1 0 "pdflatex"
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.tex" 1651650815 9961 9b0614ccbb1c877810f8854fb68e98fc ""
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.aux" 1651699142 1422 fc8e3f61d610107bd1fcefc4830da11c "pdflatex"
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.out" 1651699142 313 e4099720b0afe1d9ec82dd97620584ae "pdflatex"
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.tex" 1651699142 11342 852e2129eae3dfc6b072c264113b2f7c ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/ecbx1200.tfm" 1136768653 3584 402da0b29eafbad07963b1224b222f18 ""
@@ -124,7 +124,7 @@
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1639775816 2724744 21efffca8bfeec89977fe7c6aafcfaa8 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
   (generated)
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.log"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.pdf"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.aux"
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.log"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW5/hw5.out"

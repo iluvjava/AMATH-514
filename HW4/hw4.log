@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  27 APR 2022 20:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  27 APR 2022 22:53
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -486,17 +486,17 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7] [8]
-<HW4-5.jpg, id=153, 2190.1825pt x 3097.5725pt>
+<HW4-5.jpg, id=155, 2190.1825pt x 3097.5725pt>
 File: HW4-5.jpg Graphic file (type jpg)
 <use HW4-5.jpg>
 Package pdftex.def Info: HW4-5.jpg  used on input line 387.
 (pdftex.def)             Requested size: 341.43306pt x 482.86015pt.
-<HW4-6.jpg, id=154, 2190.1825pt x 3097.5725pt>
+<HW4-6.jpg, id=156, 2190.1825pt x 3097.5725pt>
 File: HW4-6.jpg Graphic file (type jpg)
 <use HW4-6.jpg>
 Package pdftex.def Info: HW4-6.jpg  used on input line 388.
 (pdftex.def)             Requested size: 341.43306pt x 482.86015pt.
-<HW4-7.jpg, id=155, 2190.1825pt x 3097.5725pt>
+<HW4-7.jpg, id=157, 2190.1825pt x 3097.5725pt>
 File: HW4-7.jpg Graphic file (type jpg)
 <use HW4-7.jpg>
 Package pdftex.def Info: HW4-7.jpg  used on input line 389.
@@ -512,12 +512,12 @@ Here is how much of TeX's memory you used:
  30452 multiletter control sequences out of 15000+600000
  415845 words of font info for 57 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 81i,16n,89p,577b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 81i,16n,89p,578b,468s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on /Users/hongdali/Desktop/repos/AMATH-514/HW4/hw4.pdf (12 pages, 1833943 bytes).
+Output written on /Users/hongdali/Desktop/repos/AMATH-514/HW4/hw4.pdf (12 pages, 2043772 bytes).
 PDF statistics:
- 260 PDF objects out of 1000 (max. 8388607)
- 221 compressed objects within 3 object streams
+ 262 PDF objects out of 1000 (max. 8388607)
+ 223 compressed objects within 3 object streams
  88 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 

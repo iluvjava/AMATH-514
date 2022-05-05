@@ -148,9 +148,9 @@
                 \\
                 & v'\in V\setminus S
             \end{align}
-            Which contradicts \hyperref[lemma:konig_2]{lemma \ref*{lemma:konig_2}}. Therefore $(F\setminus\{u'\})\cup \{v\}$ now covers the additional edge: $e$. 
+            Which contradicts \hyperref[lemma:konig_2]{lemma \ref*{lemma:konig_2}}. Therefore $(F\setminus\{u'\})\cup \{v\}$ now covers the additional edge: $e$ without exposing any other edges. 
             \item [(2.)] $e=\{u, v\}$, direction doesn't matter, it goes between $S$ and $U\setminus L$. Then $\overline{F}$ covers the edge: $e$ because $v\in U\setminus L$, and $\overline F = U\setminus L$ at the start, and in case (1.), we move vertices to $S$, therefore, such an edge is always gonna be covered by $\overline F$. 
-            \item [(3.)] $e$ goes between $U\setminus L$ and $V\setminus S$. This is covered by $\overline F$ because $U\setminus L$ originally covers all vertices in $V\setminus S$, and in case (1.) above, when we remove $u'$, we never expose any edges going between $U\setminus L$ and $V\setminus S$. 
+            \item [(3.)] $e$ goes between $U\setminus L$ and $V\setminus S$. This is covered by $\overline F$ because $U\setminus L$ originally covers all edges incident to $U\setminus L$, and in case (1.) above, when we remove $u'$, we never expose any edges going between $U\setminus L$ and $V\setminus S$. 
             \item [(4.)] $e$ goes between the set $L$ and $V\setminus S$. This is impossible by \hyperref[lemma:konig_4]{\ref*{lemma:konig_4}}. 
         \end{enumerate}
         For all cases, I can re-arrange $\overline F$ such that its cardinality remains unchanged and all the edges are covered. I started with $|\overline F| = |M|$, therefore, we have a vertex cover $|\overline{F}| = |M|$ in the end. 
@@ -163,8 +163,34 @@
     \end{proof}
 
 \section{Problem 3.25}
+    \begin{theorem}
+        Let $G =(V, E)$ be a bipartite graph. Then the perfect matching polytope $P$ is equal to the set of verctors $x\in \mathbb R^{|E|}$ satisfying: 
+        \begin{align}
+            Q:= 
+            \begin{cases}
+                x_e \ge 0 \quad \forall e \in E
+                \\
+                \sum_{e\ni v}^{}x_e = 1\quad \forall v \in V    
+            \end{cases}
+        \end{align}
+        Here let $G = (V\dot\cup U, E)$ be a bipartite graph and we denote $P$ as the polytope that is the convex hull of all possible perfect matching solution vectors. 
+        \par
+        Assuming that $|V| = |U| = n$ so that perfect matching is at least possible, notice that the perfect matching vector is a solution to the perfect matching problem we denote it as $\chi_M\in \mathbb \{0, 1\}^{|E|}$: 
+        \begin{align}
+            \forall e\in E: (\chi_M)_e 
+            \begin{cases}
+                1 & e \in M
+                \\
+                0 & \text{else}
+            \end{cases}
+        \end{align}
 
-
+    \end{theorem}
+    Observe that if $P = \emptyset$ then $Q = \emptyset$. This is obvious because if there is no perfect matching, then it's impossible to sum up all the edges incident to a vertex and sum up to 1. 
+    \par
+    \begin{proof}
+        We first prove the fact that $P\subseteq Q$
+    \end{proof}
 \section{Problem 8.4}
     Let $G = (V, E)$ be a graph. Describe the problem of finding a clique (= complete subgraph) of maximum cardinality as an integer linear programming problem. 
     \par

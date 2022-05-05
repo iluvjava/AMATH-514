@@ -100,7 +100,7 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             \\
             & \delta(v_j) = \{\{v_k, v_j\}: k \in [m] \wedge a_{k, j} \neq 0\}
         \end{align}
-        By Konig theorem, the maximum matching in $G$ equals to the minimum vertex cover. By definition of a Maching: 
+        By \hyperref[theorem:konig]{Konig theorem}, the maximum matching in $G$ equals to the minimum vertex cover. By definition of a Maching: 
         \begin{align}
             &\{v_{i}, v_{j}'\} \in E, \{v_{i^*}, v_{j^*}'\} \in E \text{ where } i\neq i^{*}, j \neq j^{*} 
             \\
@@ -138,7 +138,7 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
         \end{align}
     \end{prop}
     \begin{proof}
-        We use Hall's theorem to prove SDR representation conditions. The proof for Hall's Theorem is below! To use Hall's theorem, we convert the problem into a matching on a bipartite graph. 
+        We use \hyperref[theorem:Hall]{Hall's theorem} to prove SDR representation conditions. The proof for Hall's Theorem is below! To use Hall's theorem, we convert the problem into a matching on a bipartite graph. 
         \\[1.1em]
         We consider vertex set $V = [n]$, and $U = X$, then an edge $\{i, x\} \in E$ iff $x\in A_i$, and the bipartite graph is $G = (V\dot\cup U, E)$
         \begin{align}
@@ -164,10 +164,10 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
         \end{align}
         The third line is saying that if $x\in A_i$,then it's an edge in the bipartite graph, and if that is the case, the union of all $x\in A_i$ for all $i\in I$ is all the neighbouring vertices to the set $I\subseteq [n]$. 
         \\[1.1em]
-        Which is exactly what we proved below, for the Hall's Theorem. By Hall's theorem, a perfect matching $M$ is possible and it will saturate all the vertices in $[n]$, meaning that for every $i\in [n]$, there is an edge in the matching $M$ that covers it only once. And by the token, the edges in the matching are the bijective function, say $f$, going from $[n]$ to $Y\subset X$ where, each element $i\in [n]$ maps to a unique element in $Y$, a subset of $X$, in such at way that $x\in A_i, i\in [n], \{x, i\}\in M$. 
+        Which is exactly what we proved below, for the Hall's Theorem. By Hall's theorem, a perfect matching $M$ is possible and it will saturate all the vertices in $[n]$, meaning that for every $i\in [n]$, there is an edge in the matching $M$ that covers it only once. And by that token, the edges in the matching are the bijective function, say $f$, going from $[n]$ to $Y\subset X$ where, each element $i\in [n]$ maps to a unique element in $Y$, a subset of $X$, in such at way that $x\in A_i, i\in [n], \{x, i\}\in M$. 
     \end{proof}
     \begin{theorem}[Hall's Theorem]\label{theorem:Hall}
-        Let $G = (V\dot{\cup} U, E)$ be a bipartite graph, and $V, U$ are the partitions of vertices of the 2 sides, then a saturating matching (A matching that includes all element in $V$, or $U$) is possible if and only if: 
+        Let $G = (V\dot{\cup} U, E)$ be a bipartite graph, and $V, U$ are the partitions of vertices of the 2 sides, then a saturating matching (A matching that cover all elements in $V$, or all in $U$) is possible if and only if: 
         \begin{align}
             \forall\; W \subseteq V: 
             |W| \le |\text{ngh}(W)| \iff 
@@ -193,7 +193,7 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
         \end{align}
         The first statement is the the Hypothesis holds for the subgraph $V$, and the second statement show that it still holds as we add a vertex, then we wish to prove that a Saturating Matching on $V'\cup \{v^+\}$ is still possible. 
         \\[1.1em]
-        For the neighbours of the new comer $v^+$, they are only 2 cases, either it's not a subset of $\text{ngh}(V')$, in this case, a matching edge can be added trivially, just take the $u^+\in \text{ngh}(v^+), u^+\not\in\text{ngh}(V')$. Next, we consider the case where $\text{ngh}(v^+)\subseteq \text{ngh}(V')$; let $M$ be a matching between $V'$ and $\text{ngh}(V')$. Consier the set of vertices in $V'$ that is sharing neighbours with $v^+$: 
+        For the neighbours of the new comer $v^+$, they are only 2 cases, either it's not a subset of $\text{ngh}(V')$, in this case, a matching edge can be added trivially, just take the $u^+\in \text{ngh}(v^+), u^+\not\in\text{ngh}(V')$. Next, we consider the case where $\text{ngh}(v^+)\subseteq \text{ngh}(V')$; let $M$ be a matching between $V'$ and $\text{ngh}(V')$. Consider the set of vertices in $V'$ that is sharing neighbours with $v^+$: 
         \begin{align}
             & V'' := \{v\in V': \text{ngh}(v)\cup \text{ngh}(v^+)\neq \emptyset\}
             \\
@@ -203,17 +203,17 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             & V''\subseteq V' \implies 
             |V''\cup\{v^+\}|\le |\text{ngh}(V''\cup\{v^+\})|
         \end{align}
-        The second and the third line is the inductive hypothesis. recall that by definition $\text{ngh}(V'') = \text{ngh}(V''\cup \{v^+\})$, therefore: 
+        The second (4.0.13) and the third line (4.0.14) is the inductive hypothesis. recall that by definition $\text{ngh}(V'') = \text{ngh}(V''\cup \{v^+\})$, therefore: 
         \begin{align}
             & |V''\cup\{v^+\}|\le |\text{ngh}(V''\cup\{v^+\})|
             \\
-            & |V''| \le |V''\cup\{v^+\}|\le |\text{ngh}(V'')|
+            & |V''| < |V''\cup\{v^+\}|\le |\text{ngh}(V'')|
             \\
             & |V''| < |\text{ngh}(V'')|
         \end{align}
-        The vertices shareing the same neighbour with $v^+$, their neighbours has one spot of vacancy, as shown by the strict inequality above. Let $u''$ be that vertex in $\text{nhg}(V'')$ such that $u''\not\in M$. Then we have a new matching: $M\cup \{u''\}$ which cover $v^+$. 
+        Among the vertices sharing the same neighbours with $v^+$, their neighbours has one spot of vacancy, as shown by the strict inequality above. Let $u''$ be that vertex in $\text{nhg}(V'')$ such that $u''\not\in \bigcup_{e\in M}e$. Then we have a new matching: $M\cup \{v^+, u''\}$ which cover $v^+$. 
         \\[1.1em]
-        Inductively consider redefineing $V':= V'\cup \{v^+\}$ and $M:= M\cup \{\{v^+,u''\}\}$, and each time, and the conditions hold inductively, then after adding all such vertices $v^+$, we will end up with $V' = V$. And since we can find a matching that covers $v^+$ without deleting any pre-existing edges in the matching, the matching is saturated; all vertices in $V$ is covered by the matching. 
+        Inductively consider redefining $V':= V'\cup \{v^+\}$ and $M:= M\cup \{\{v^+,u''\}\}$, and each time, and the conditions hold inductively, then after adding all such vertices $v^+$, we will end up with $V' = V$. And since we can find a matching that covers $v^+$ without deleting any pre-existing edges in the matching, the matching is saturated; all vertices in $V$ is covered by the matching. 
     \end{proof}
 \section{Problem 3.11}
     \begin{definition}[Doubly Stochastic matrix]
@@ -320,7 +320,7 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             We use such permutations to define another column permutations matrix that does the permuting. Each ones in $P^{(k)}$ correponds to some non-zero elements in the matrix $A^{(k)}$ by proposition 5.1. Next, we consider a special choice of an entry in the matrix $A^{(k)}$: 
             \begin{align}
                 & (i^{(k)}, j^{(k)}) \in \arg\min_{(i, j)\in [n]\times [n]}
-                a_{i, j}
+                a^{(k)}_{i, j}
                 \\
                 & \implies 0 \le a^{(k)}_{i^{(k)}, j^{(k)}} \le s^{(k)}
                 \\
@@ -331,31 +331,31 @@ Assuming a nondirected graph $G = (V, E)$. We define the following notations:
             \end{align}
             Take notice that, either $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} = \mathbf 0_{n\times n}$, or the case that it's not a zero matrix. For one case, we go inductively, for the other case we unroll the results and represent $A$ as a convex combinations of permutation matrices. 
             \begin{itemize}
-                \item [1.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}$. Then this matrix is still a scaled doubly stochastic matrix and its row and column sums are gonna be: 
+                \item [1.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} \neq \mathbf 0_{n\times n}$. Then this matrix is still a scaled doubly stochastic matrix and its row and column sums are gonna be: 
                 \begin{align}
                     0 & \le\forall j \in [n]: 
                         \left(
                             \sum_{i \in [n]}^{} 
-                            a^{k}_{i, j}
+                            a^{(k)}_{i, j}
                         \right) - a^{(k)}_{i^{(k)}, j^{(k)}} 
                         = s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}} 
                         \\
                     0 & \le \forall i \in [n]: 
                     \left(
                         \sum_{j \in [n]}^{} 
-                        a^{k}_{i, j}
+                        a^{(k)}_{i, j}
                     \right) - a^{(k)}_{i^{(k)}, j^{(k)}} 
                     = s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}} 
                 \end{align}
-                Remember that $p^{(k)}$ is a permutation matrix and $A^{(k)}$ is a $s^{(k)}$ scaled doubly stochastic matrix, therefore, each row and column has a unique $1$ in it. Therefore, $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}$ is still a scaled doubly stochastic matrix since it's assumed to be not equal to zero, and the scale is $s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}> 0$. Then, define the following quantities and inductively, going back to the proof at the beginning: 
+                Remember that $p^{(k)}$ is a permutation matrix and $A^{(k)}$ is a $s^{(k)}$ scaled doubly stochastic matrix, therefore, each row and column has a unique $1$ in it. Therefore, $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} \neq \mathbf 0_{n\times n}$ is still a scaled doubly stochastic matrix since it's assumed to be not equal to zero, and the scale is $s^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}> 0$. Then, define the following quantities and inductively, going back to the proof at the beginning: 
                 \begin{align}
                     & 
-                    A^{(k + 1)}:= A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} \neq \mathbf 0_{n\times n}
+                    A^{(k + 1)}:= A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} \neq \mathbf 0_{n\times n}
                     \\
                     & s^{(k + 1)} := 1 - a^{(k)}_{i^{(k)}, j^{(k)}}
                 \end{align}
                 We then go through the prove again with $A^{(k + 1)}$. 
-                \item [2.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{k} = \mathbf 0_{n\times n}$, then this inductive process terminates, and we have: 
+                \item [2.)] $A^{(k)} - a^{(k)}_{i^{(k)}, j^{(k)}}P^{(k)} = \mathbf 0_{n\times n}$, then this inductive process terminates, and we have: 
                 \begin{align}
                     & 
                     \underbrace{A^{(k)}}_{\mathbf 0_{n\times n}} = A^{(0)} - \sum_{m = 1}^{k - 1}

@@ -1,15 +1,24 @@
 \documentclass[]{article}
-\usepackage{amsmath}\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
 \usepackage[english]{babel}
 \usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{prop}{Proposition}
-\newtheorem{lemma}{Lemma}
-\newtheorem{definition}{Definition}
-\usepackage[margin=1in,footskip=0.25in]{geometry}
 \usepackage{mathtools}
 \usepackage{hyperref}
+% \usepackage{minted}
+% Basic Type Settings ----------------------------------------------------------
+\usepackage[margin=1in,footskip=0.25in]{geometry}
+\linespread{1}  % double spaced or single spaced
+\usepackage[fontsize=12pt]{fontsize}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}       % Theorem counter global 
+\newtheorem{prop}{Proposition}[section]  % proposition counter is section
+\newtheorem{lemma}{Lemma}[subsection]  % lemma counter is subsection
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}[subsection]
+
+
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -21,9 +30,9 @@
 \usepackage{courier}
 \lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
 \newcommand{\indep}{\perp \!\!\! \perp}
-% \usepackage{wrapfig}
+\usepackage{wrapfig}
 \graphicspath{{.}}
-% \usepackage{fancyvrb}
+\usepackage{fancyvrb}
 
 %%
 %% Julia definition (c) 2014 Jubobs
@@ -43,7 +52,6 @@
    morestring=[s]{"}{"},%
    morestring=[m]{'}{'},%
 }[keywords,comments,strings]%
-
 \lstset{%
     language         = Julia,
     basicstyle       = \ttfamily,
@@ -53,8 +61,8 @@
     showstringspaces = false,
 }
 
-\linespread{1}
-\usepackage[fontsize=12pt]{fontsize}
+
+
 \begin{document}
 \numberwithin{equation}{subsection}
 \begin{center}
@@ -63,37 +71,51 @@
 \section{Problem 2.16}
     \begin{prop}
         \begin{align}
-            (\exists x \ge \mathbf 0: Ax = \mathbf 0 )
+            (\exists x > \mathbf 0: Ax = \mathbf 0 )
             \iff 
             (y^TA \ge \mathbf 0 \implies y^TA = \mathbf 0)
         \end{align}
     \end{prop}
-    \noindent
-    Introduce the lemma: 
-    \begin{lemma}
-        if $x >\mathbf 0$, and $y\ge \mathbf 0$, then $\langle x, y\rangle \ge \mathbf 0$. 
-    \end{lemma}
-    \begin{proof}[Lemma 1]
-        This is true because $\langle x, y\rangle = \sum_{i = 1}^{n}x_i y_i \ge \mathbf 0$, we are just multiplying each of the inequality by a non-negative number and then sum then all up. 
-    \end{proof}
     \begin{proof}[Proposition 1]
-        Proof of sufficiency $\implies$: 
+        Proof in direction $\implies$: 
         \begin{align}
             &\text{choose }x \text{ s.t: } Ax = \mathbf 0 ,\; x > \mathbf 0
             \\
             & y^TA \ge\mathbf 0 \wedge y^TAx = \mathbf 0 \implies y^TA = \mathbf 0
         \end{align}
-        $y^TA \ge \mathbf 0$ and by $y^TAx = 0, x\ge 0$, we know that $y^TA = \mathbf 0$, because you can't sum up positive number and still get zero. 
-        \par
-        Proof of neccessity $\impliedby$: we will use prove by contradiction, we assume that $y^TA\ge \mathbf 0$ and $y^TA = \mathbf 0$, and for contradiction we assume $\not\exists x > \mathbf 0: Ax = \mathbf 0$. 
+        $y^TA \ge \mathbf 0$ and by $y^TAx = 0, x> \mathbf 0$, we know that $y^TA = \mathbf 0$, because you can't sum up positive number and still get zero. Geometrically it's saying that if $\mathbf 0$ is in the affine hull of the cone made by the columns of $A$, and, there is a vector $y$ such that every columns of $A$ falls to one side of $y$, then it must be the case that the columns of $A$ are on the hyperplane perpendicular to $y$. 
+        \\
+        \noindent
+        For the proof in the direction $\impliedby$ we consider a direct proof starting with: 
         \begin{align}
-            & y^TA = \mathbf 0 \implies y^TAx = \mathbf 0 \quad \forall x
+            & (y^TA \ge \mathbf 0 \implies y^TA= \mathbf 0)
+            \implies 
+            (\exists x \ge \mathbf 0: Ax = \mathbf 0)
             \\
-            &\hspace{1.1em}
-            \exists x > \mathbf 0: \underbrace{y^TA}_{\ge \mathbf 0} \underbrace{x}_{x > 0} = \mathbf 0
-            \\
-            & \text{Contradicts Lemma 1}
+            & \neg(\exists y^TA \ge 0 \wedge y^TA \neq \mathbf 0)
+            \implies 
+            (\exists x \ge \mathbf 0: Ax = \mathbf 0)
         \end{align}
+        Take note that if $y^TA \ge \mathbf 0 \wedge y^TA \neq \mathbf 0$, assuming it's true then it can be simplified into $y^TA \ge \mathbf 0 \wedge y^TA > \mathbf 0$. This is saying that if there doesn't exist any hyperplane defined by $y$ such that it separates the columns of $y$ onto the positive side and no columns are on the hyperplane, then they have to be all lay on the strict positive side of $y$. Then we can consider the statement for each of the column $a_i$ of $A$ making it looks like one of the cases of Ferkas's Lemma: 
+        \begin{align}
+            & \forall i \in [n]: \neg(\exists y^TA \ge \mathbf 0 \wedge y^Ta_i > 0)
+            \\ 
+            &\quad \implies 
+            \forall i \in [n]: \exists z_i \ge \mathbf 0: Az_i = -a_i
+        \end{align}
+       In this case, we are setting the vector $b = -a_i$ and then applying the ferkas's lemma, attempting to crate a cone usin $z_i$ scaling columns of $A$ to include $-a_i$. Which then implies the fact that: 
+       \begin{align}
+            & A\left(
+                \sum_{j = 1}^{n}z_i
+            \right) = -A\mathbf 1
+            \\
+            & 
+            A\left(
+                \underbrace{\sum_{j = 1}^{n}z_i + e_i}_{> \mathbf 0}
+            \right) = \mathbf 0
+       \end{align}
+       Here,we summed up the results from (1.0.7) and then move then to one side of the equation, then the quantity multipled by matrix $A$ is strictly positive because $z_i\ge \mathbf 0$ at and the sum of $e_i$ are all strictly positive. 
+    
 
     \end{proof}
 
@@ -105,10 +127,117 @@
     Here is the approach for this problem. A polytope is closed therefore the objective value is going to be bounded. Next, if supremum of the objective exists then there is a point inside of the closed polytope $p$ that attains it. 
     \par
     To show that the pint $x^+$ is a vertex, we assume it's not, then we show that either we can wiggle it around to improve $\langle c, x\rangle$, or we can just wiggle it so it becomes an vertex in $P$ eventually, hence it has to be a vertex. 
+    \begin{proof}
+        Let the set $\mathcal I$ be the indices for all the tight constraints for the given point $x^+ \in P$, then $\mathcal I := \{i\in [m]: a_i^Tx^+= b_i\}$ where $a_i$ is a vector denoting the ith row of matrix $A$, and $|\mathcal I| \le n$. Next we consider the wiggle vector $w \in \mathbb R^n$ such that $w \neq \mathbf 0$ for $x^+$. By the definition that $x^+$ is not a vertex, we know that the sub matrix $A_{\mathcal I, :}$ whose rows are indexed by $\mathcal I$ has $\text{rank}(A_{\mathcal I, :})\le n$. Therefore: 
+        \begin{align}
+            & \exists w \neq \mathbf 0 : (A_{\mathcal I, :})w = \mathbf 0
+            \\
+            &\hspace{1.1em} \implies
+            \forall j \in [m]\setminus \mathcal I: 
+            a_j^Tx^+ < b_j
+        \end{align}
+        The inequality is loose, therefore we can try inserting the quantity $\alpha_ja_j^Tw$ into the inequality like: 
+        \begin{align}
+            & \exists\; \alpha_j > 0 : a_j^Tx^+ \pm \alpha_ja_j^Tw \le b_j
+            \\
+            &\hspace{1.1em} \implies 
+                \pm \alpha_j a^T_jw \le b_j - a_j^Tx^+
+            \\
+            &\hspace{1.1em} \implies 
+                -(b_j - a_j^Tx^+)\le \alpha_j a^T_jw \le b_j - a_j^Tx^+ 
+            \\
+            &\hspace{1.1em} \implies 
+            \alpha_j
+            |a_j^Tw|\le |b_j - a_j^Tx^+|
+            \\
+            &\hspace{1.1em} \implies 
+            \alpha_j \le \left|
+                \frac{b_j - a_j^Tx^+}{a_j^Tw}
+            \right|
+        \end{align}
+        Now, we can choose the minimal $\alpha_j$ to determine how much wiggle room we have for $x^+$ such that it stills remains in $P$, name that variable $\alpha$ and it would be given as: 
+        \begin{align}
+            & \alpha := \min_{j \in [m]\setminus \mathcal I}\left\lbrace
+                \left|\frac{b_j - a_j}{a^T_jw}\right|
+            \right\rbrace
+            \\&\quad\implies
+            A(x^+ \pm \alpha w)  \le b
+            \implies x^+ \pm \alpha w \in P
+        \end{align}
+        Next, we may consider the objective value achieve by this wiggled point: 
+        \begin{align}
+            &\langle c, x^+ \pm \alpha w\rangle
+            \\
+            & \langle c,\alpha w\rangle \neq 0 
+            \\&\quad \implies
+            (\langle c, x^+ + \alpha w\rangle > \langle c, x^+\rangle)
+            \vee 
+            (\langle c, x^+  -\alpha w\rangle > \langle c, x^+\rangle)
+        \end{align}
+        Therefore, in this case, we $x^+$ cannot be an optimal yet, which is a contradiction. Otherwise, it has to be the case that $\langle c, \alpha w\rangle = 0$, which tells use that we can make a new point $x^{++}$ be either $x^+ + \alpha w$ or $x^+ - \alpha w$, and then we will have one more tight constraint for the set $\mathcal I$. More specifically, choose: 
+        \begin{align}
+            & \forall j^+\in \arg\min_{j \in [m]\setminus \mathcal I}
+            \left\lbrace
+                \left|\frac{b_j - a_j}{a^T_jw}\right|
+            \right\rbrace
+            \\& \quad \implies
+            (\alpha_{j^+} x^+ + \alpha_{j^+}a^T_{j^+}w = b_i )
+            \vee 
+            (\alpha_{j^+} x^+ - \alpha_{j^+}a^T_{j^+}w = b_i )
+        \end{align}
+        Choose the right sign for $\alpha_{j^+}$ such that it makes the constraints $j^+$ tight, then we have one or more more tight constraints for our point $x^+$, which means that: $A_{\mathcal I \cup \{j^+\}, :}$ must have a higher rank than $A_{\mathcal I, :}$. To this regard, we can repeat this process by redefining $x^+ = x^{++}, \mathcal I := \mathcal I \cup \{j^+\}$, and repeat the proof. Eventually, we will have $x^+$ becoming a vartex because $\text{rank}(A_{\mathcal I, :}) = n$ eventually $x^+$ will be a vertex in $P$. This is true because polytope is closed, it's impossible that $x^+$ gives us some constraints that is unbounded. 
 
+    \end{proof}
 \section*{2.26}
-
+    Find a case where $\{x|Ax \ge b\}$ and $\{y| y\ge \mathbf 0: y^TA = c^T\}$ are empty.
+    \par
+    Consider 2d where we have $x_1, x_2$ as coordinates for primal and $y_1, y_2$ for dual: 
+    \begin{align}
+        &
+       \underbrace{ \begin{bmatrix}
+            -1 & 0
+            \\
+            1 & 0
+        \end{bmatrix}}_{A}
+        \begin{bmatrix}
+            x_1 \\ x_2 
+        \end{bmatrix} \le 
+        \begin{bmatrix}
+            -1 \\ -1
+        \end{bmatrix}
+        \\
+        & 
+        c = \begin{bmatrix}
+            0 \\ 1
+        \end{bmatrix}
+    \end{align}
+    Observe that $c$ is in the null space of $A$, therefore it's impossible that $y^TA = c^T$, at the same time the polytope is empty too. 
 \section*{2.27}
+    \begin{prop}
+        define the primal and dual problem pairs for LP to be the following: 
+        \begin{align}
+            \max\{\langle c, x\rangle: Ax \le b\} \le 
+            \min\{
+                y^Tb: y^TA = c^T, y \ge \mathbf 0    
+            \}
+        \end{align}
+        Both $x, y$ are optimal iff $\forall i \in [m]: y_i = 0\implies a_i^Tx = b_i$. The weights on the loose constraints will have to be zero. 
+    \end{prop}
+    \begin{proof}
+        \begin{align}
+            & Ax \le b
+            \\
+            & \quad \implies
+            Ax + s = b \quad s \ge \mathbf 0    
+            \\
+            & y^T(Ax + s) = y^Tb
+            \\
+            & \underbrace{y^TA}_{=c^T} x + \underbrace{y^Ts}_{\ge \mathbf 0} = y^Tb
+            \\
+            & c^Tx + y^Ts = y^Tb
+        \end{align}
+        Take note that $y^Tb = c^Tx$ by strong duality (we proved that part in class), therefore $y^Ts = 0$. However, take note that whenever index $j$ are of a loose constraints for the optimal $x\in P$, $a_j^Tx \le b_j \implies s_j > 0$, by the fact that $y\ge \mathbf 0, s \ge \mathbf 0$, it must be the case that $y_j = 0$ for all such $j$. Proof done. 
+    \end{proof}
 
 
 \end{document}
