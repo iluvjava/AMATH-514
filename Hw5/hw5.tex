@@ -165,7 +165,7 @@
 \section{Problem 3.25}
     \begin{theorem}
         Let $G =(V, E)$ be a bipartite graph. Then the perfect matching polytope $P$ is equal to the set of verctors $x\in \mathbb R^{|E|}$ satisfying: 
-        \begin{align}
+        \begin{align}\label{definition:Q}
             Q:= 
             \begin{cases}
                 x_e \ge 0 \quad \forall e \in E
@@ -177,20 +177,83 @@
         \par
         Assuming that $|V| = |U| = n$ so that perfect matching is at least possible, notice that the perfect matching vector is a solution to the perfect matching problem we denote it as $\chi_M\in \mathbb \{0, 1\}^{|E|}$: 
         \begin{align}
-            \forall e\in E: (\chi_M)_e 
+            & \forall e\in E: (\chi_M)_e := 
             \begin{cases}
                 1 & e \in M
                 \\
                 0 & \text{else}
             \end{cases}
+            \\
+            & P = \text{conv}\{\chi_M: M \text{ is a matching on G}\}
         \end{align}
-
+        The theorem states that $P = Q$ \textbf{when} $G$ is bipartite. 
     \end{theorem}
-    Observe that if $P = \emptyset$ then $Q = \emptyset$. This is obvious because if there is no perfect matching, then it's impossible to sum up all the edges incident to a vertex and sum up to 1. 
-    \par
-    \begin{proof}
-        We first prove the fact that $P\subseteq Q$
-    \end{proof}
+    Observe that if $P = \emptyset$ then $Q = \emptyset$. This is obvious because if there is no perfect matching, then it's impossible to sum up all the edges incident to a vertex and sum up to 1. The trivial case holds up. 
+    \subsection{Settings Things up}
+        Let $G:= (U\dot\cup V, E)$ be bipartite, $w:\mathbb R^{|E|} \mapsto \mathbb R_+$ be a weight functions on all the edges of $G$. We further assum $|U|=|V| = n$, and the vertices are enumerable: 
+        \begin{align}
+            & U:= \{u_i\}_{i = 1}^n 
+            \\
+            & V:= \{v_i\}_{i= 1}^n 
+        \end{align}
+        Then we define another matrix $A\in \mathbb R^{n\times n}$, which represent the weight function $w$ for each edges on the bipartite graph: 
+        \begin{align}
+            a_{i, j} := \begin{cases}
+                w(\{u_i, v_j\}) & \{u_i, v_j\} \in E
+                \\
+                0 & \text{else}
+            \end{cases}
+        \end{align}
+    \subsection{Show $Q \subseteq P$}
+        Take any $x\in Q$, then $x\in \mathbb R^{|E|}$, and it can define a weight function for all the edges on $E$: 
+        \begin{align}
+            w(e):= x_e
+        \end{align}
+        Which induces a matrix because assuming that $G$ is bipartite: 
+        \begin{align}
+            a_{i, j} := 
+            \begin{cases}
+                x_e & e=\{u_i, v_j\}, e\in E
+                \\
+                0 & \text{else}
+            \end{cases}
+        \end{align}
+        For how $Q$ is defined in (\hyperref[definition:Q]{\ref*{definition:Q}}) we have this: 
+        \begin{align}
+            & \forall v \in U \dot\cup V:
+            \sum_{v \ni e}^{}x_e = 1\quad x_e \ge 0 \; \forall e\in E
+            \\
+            \implies &
+            \forall u_i \in U: \sum_{\{u_i, v_j\}\in E}^{} x_{\{u_i, v_j\}} = 1 = \sum_{j = 1}^{n} a_{i, j}
+            \\
+            \implies & 
+            \forall v_j \in V: \sum_{\{u_i, v_j\}\in E}^{} x_{\{u_i, v_j\}} = 1 = \sum_{i = 1}^{n} a_{i, j}
+        \end{align}
+        For any vertices in $G$, we can break it into 2 cases, in $U$ or $V$. For both cases we can invoke the definition of $Q$, and sume up all $x_e$ where $e$ is incident to the vertex: $u_i, v_j$. Then by the definition of $a_{i, j}$ back in (2.2.2), both of them has to be equal to 1. Therefore, the matrix $A$ whose $(i, j)$ entry are $a_{i, j}$ are going to be a doubly stochastic matrix. The non-negativity constraint of $x_e$ translate to corresponding $a_{i, j}$ by (2.2.2) as well. 
+        \par
+        From 3.11 of the last HW, we know that the matrix $A$ is a convex combinations of permutations matrices. And most importantly, a permutation matrix is a perfect matching on a bipartite graph of the same size. Let $\mathbf P$ denotes any $n\times n$ permutations matrix, and let $\pi:[n]\mapsto [n]$ be bijective, then $\pi$ induces a permutations matrix: 
+        \begin{align}
+            \mathbf P := \begin{bmatrix}
+                e_{\pi(1)} & e_{\pi(2)} & \cdots & e_{\pi(n)}
+            \end{bmatrix}
+            \\
+            \text{define }\mathcal M_{\mathbf P} \text{ s.t: }
+            \mathbf P_{i, j} \neq 0 \iff 
+            \{u_i, u_j\} \in \mathcal M_{\mathbf P}
+            \\
+            \implies \mathcal M_{\mathbf P} \text{ is a matching on G}
+        \end{align}
+        This is true because for each $v_j\in V$, $\exists! \{u_{\pi(j)}, v_j\} \in \mathcal M_{\mathbf P}$. Therefore all vertices in $U$ are covered, and since $|U|=|V|=n$, the matching is perfect. Further more, the matching introduced by $\mathbf P$ can be converted into a binary vector in $\chi_{\mathcal M_{\mathbf P}}\in \{1, 0\}^{|E|}$: 
+        \begin{align}
+            (\chi_{\mathcal M_{\mathbf P}})_e = 1 \iff e\in \mathcal M_{\mathbf P}
+        \end{align}
+        For each non zero element $a_{i, j}$, they are a convex combinations of all possible $\mathbf P_{i, j}$ where $\mathbf P$ is a permutation matrix, by (2.2.2) we know that $x_e$ is a convex combinations of all possible $(\chi_{\mathcal M_{\mathbf P}})_e$. Therefore the whole vector $x$ is a convex combinations of $\chi_{\mathcal M_{\mathbf P}}$ for all possible $\mathbf P$;  $x$ now fits the definition of $P$, therefore, $Q\subseteq P$. 
+    \subsection{Show $P\subseteq Q$}
+        This is true because each $\chi_{M}$ is also an element of $Q$, this is direct from the definition of a perfect matching (we don't even need $G$ to be bipartite in this direction). Using the fact that the set $Q$ is convex, and it contains all $\chi_{M}$, therefore, it contains the convex hull of all $\chi_{M}$.
+    \begin{proof}[Theorem 1]
+        Since $P\subseteq Q$ and $Q\subseteq P$ from the previous 2 sections, $P=Q$. 
+    \end{proof} 
+    
 \section{Problem 8.4}
     Let $G = (V, E)$ be a graph. Describe the problem of finding a clique (= complete subgraph) of maximum cardinality as an integer linear programming problem. 
     \par
@@ -202,6 +265,32 @@
         P_I &:= P \cap \mathbb Z^{|E| + |V|} \leftarrow \text{This is what we want}
     \end{align}
     For every vertices chosen, there must exist an edge $e\in E$ between them, then it will be a clique on the graph. To assert it we prevent the case where $u, v$ are chosen and there is no edges betwee them (which is (2.0.1)). The second line (2.0.2) asserts the conditions that we want the integral solutions. 
+
+\section{Problem 8.7}
+    \begin{prop}
+        Give integer matrix $A$ and an integer vector $b$ s.t: polyhedron $P:= \{x|Ax \le b\}$ is integer and $A$ is not T.U (totally Unimodular). 
+    \end{prop}
+    \par
+    For the trivial case consider $A\in \mathbb R^{1\times 1}$, $A = 2$, and the polytope: $P:=\{x|Ax \le 4\}$, then: 
+    \begin{align}
+        2x \le 4 \implies x = 2
+    \end{align}
+    The vertex is an integer and $\det(A) = 2$, not T.U. For a bigger example consider: 
+    \begin{align}
+        A := \begin{bmatrix}
+            2 & 0
+            \\
+            0 & 2
+            \\
+            -1 & 0
+            \\
+            0 & -1
+        \end{bmatrix}
+        b := \begin{bmatrix}
+            2 \\2 \\ 0\\ 0
+        \end{bmatrix}
+    \end{align}
+    Then determinant of upper 2 by 2 of $A$ is not $4$ which means $A$ is not T.U. Next the polytope define by such $A, b$ will heve vertex: $[0\; 1]^T, [1\; 0]^T$ which are integral. 
 
 
 \end{document}
