@@ -1,0 +1,214 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts} 
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{hyperref}
+% \usepackage{minted}
+% Basic Type Settings ----------------------------------------------------------
+\usepackage[margin=1in,footskip=0.25in]{geometry}
+\linespread{1}  % double spaced or single spaced
+\usepackage[fontsize=12pt]{fontsize}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}       % Theorem counter global 
+\newtheorem{prop}{Proposition}[section]  % proposition counter is section
+\newtheorem{lemma}{Lemma}[subsection]  % lemma counter is subsection
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}[subsection]
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+}
+\usepackage[final]{graphicx}
+\usepackage{listings}
+\usepackage{courier}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\newcommand{\indep}{\perp \!\!\! \perp}
+\usepackage{wrapfig}
+\graphicspath{{.}}
+\usepackage{fancyvrb}
+
+%%
+%% Julia definition (c) 2014 Jubobs
+%%
+\usepackage[T1]{fontenc}
+\usepackage{beramono}
+\usepackage[usenames,dvipsnames]{xcolor}
+\lstdefinelanguage{Julia}%
+  {morekeywords={abstract,break,case,catch,const,continue,do,else,elseif,%
+      end,export,false,for,function,immutable,import,importall,if,in,%
+      macro,module,otherwise,quote,return,switch,true,try,type,typealias,%
+      using,while},%
+   sensitive=true,%
+   alsoother={$},%
+   morecomment=[l]\#,%
+   morecomment=[n]{\#=}{=\#},%
+   morestring=[s]{"}{"},%
+   morestring=[m]{'}{'},%
+}[keywords,comments,strings]%
+\lstset{%
+    language         = Julia,
+    basicstyle       = \ttfamily,
+    keywordstyle     = \bfseries\color{blue},
+    stringstyle      = \color{magenta},
+    commentstyle     = \color{ForestGreen},
+    showstringspaces = false,
+}
+
+\begin{document}
+\numberwithin{equation}{subsection}
+\section*{Notations}
+    \begin{itemize}
+        \item [1.] $\mathbbm 1_{C}$ to be an indicator set, where $C \subseteq E$, and it's indexed by element $e\in E$ such that $(\mathbbm 1_C)_e = 1$ when $e\in C$ and $0$ when $e\not\in C$
+        \item [2.] Define $\delta^+(v):= \{(v, u)\in A| u\in V \}$ to be the set of arcs coming out of the vertex $v$ on the direction graph $D:=(V, A)$. Follows a similar manner, $\delta^-(v):= \{(u, v)| u\in V\}$ be the set of arcs that are coming into the vertex $v$ on the digraph. Similarly, one can define it for a set of vertices as well, which will be a indicator vector representing the set of arcs cutting into or out of a set of vertices on the digraph. 
+        \item [3.] Define $\mathbbm 1_{\delta^{\pm}(v)} = \mathbbm 1_{\delta^+(v)}  - \mathbbm 1_{\delta^-(v)}$, which is a vector of $\pm$ denoting arcs that are coming into or out of the vertex $v\in V$. 
+    \end{itemize}
+\section{Problem 1}
+    \begin{prop}
+        Let $D:= (V, A)$ be a digraph with $|V| = n$ and $|A| = m$, and define $M_D\in \mathbb R^{n\times m}$ be an incidence matrix of $D$. Then the determinant of any $(n - 1)\times (n - 1)$ sub matrix $M'$ of $M_D$ hs a determinant of $\pm1$ when the chosen columns of $M'$ from $M_D$ forms a tree on the digraph, disregard the directions of the chosen edges. 
+    \end{prop}
+    \subsection{Proof Strategies}
+        For the proof of sufficiency ($\impliedby$), we assume that the submatrix $M'$ has columns of $M_D$ where it corresponds to a cycle: $C$ on the original graph, regardless of directions of the edges. Then, I will show that the absolute values of $\text{det}(M')$ is preseved when I make the directions of edges of $C$ so they aligns; which means that now I can send through a circulation on the cycle, which give me a vector on the null space of $M'$. 
+        \par
+        For the proof of neccessity ($\implies$), we assume that the sub graph represented by $M'$ is a tree, which implies that each arc must introduce us to a new vertex in the graph, which in the end actually gives us a matrix that is bi-diagonal with nonzeros on the diagonal. 
+    \subsection{Proof Direction $\impliedby$}
+        WOLG Let $M'$ be an $(n- 1)\times (n - 1)$ sub matrix of $M_D$ that takes $\mathcal C\subset [m]$ columns and $[n-1]$ rows of of $M_D$ ($v_n$ is not chosen to be a row of $M'$) such that they doesn't form a tree on $D$, disregarding the directions of the arcs. Not a tree means columns of $M'$ can contain a cycle if we treat the arcs as edges, for example: 
+        \begin{align}
+            \underbrace{\text{WOLG let}}_{\text{Read Remark!} }  C := v_0 \underset{a_{k_1}}{\longrightarrow} v_1 \underset{a_{k_2}}{\longleftarrow} v_2 \underset{a_{k_3}}{\longrightarrow} v_3 \cdots v_{l - 1} \underset{a_{k_l}}{\longrightarrow} v_l, \quad l \le n - 1 
+        \end{align}
+        We want to send a flow to it, because the cycle is subset of arcs represented by $M'$, and if we can send a flow: $\mathbbm 1_C$, then $M'\mathbbm 1_C = \mathbf 0$. The good news is, swapping the direction of any arcs $a_{k_i}$ on $C$ a subgraph of $D$ corresponds to multiplying the $k_i$ column of $M'$ by $-1$, which perserves the absolute value of the determinant. 
+        \par
+        Consider doing this for all the arcs in $C$ to aling all of them to form a directed cycle for a circulations and we obtained $M''$ as the new matrix, then: 
+        \begin{align}
+            & |\text{det}(M'')| = |\text{det}(M')|
+            \\
+            & M'' \mathbbm 1_C = \mathbf 0 \implies |\text{det}(M'')| = 0
+            \\
+            \implies & |\text{det}(M)| = 0
+        \end{align}
+        \begin{remark}[A tiny Subtlety here]
+           We made the assumption that all the vertices in the cycle $C$ indeed corresponds to the first $(n - 1)$ vertices. This is a legit assumption because if any of the vertices $v_i$ is not in the cycle, them that $t$th row is going to be all zeros! Which trivially makes the matrix having a null space, hence a determinant of zero. 
+        \end{remark}
+
+    \subsection{Proof Direction $\implies$}
+        WLOG, let $M'$ be $(M_D)_{1:n - 1, 1:n - 1}$, a sub-matrix that takes all vertices except $v_n$, and it takes the first $(n - 1)$ columns of $M_D$ too.\footnote{We can do this because we can get the tree first and then permute columns and rows of $M_D$ so that the first $(n - 1)$ arcs are in the tree. } 
+        \par
+        $M'$'s columns represents arcs that connects all the vertices because they form a spanning tree. Therefore, for all rows of $M'$, it has at least one $\pm 1$ on it because they are the first $n - 1$ vertices in the graph, connected by all first $n - 1$ arcs in the graph, therefore it's possible to permute the matrix such that all it's diagonal elements are $\in \{\pm 1\}$. Let's reorder the columns of $M'$ allows for the diagonal to be all $\in \{\pm 1\}$
+        \par
+        Moreover, tree has the proprty that we can remove one edge from the tree and it will always connect to a new vertex in the original graph.\footnote{The arc connecting to $v_n$ is removed as the last arc! This is absolutely doable.} Let's order the vertices the same way as how they are removed! That implies the following structure about the matrix $M'$: 
+        \begin{align}
+            (M_D)_{1:k, 1:k + 1}
+            &= 
+            \begin{bmatrix}
+                \underbrace{\begin{bmatrix}
+                    \{\pm 1\} &   & & \\
+                    \{\pm 1\} & \{\pm 1\} & & \\
+                      & \{\pm 1\} & \{\pm 1\} & \\
+                      & & \ddots  &  \ddots\\
+                      & & & \{\pm 1\} & \{\pm 1\}
+                \end{bmatrix}}_{(M_D)_{1:k, 1:k}}
+                \\
+                \begin{matrix}
+                    \pm \mathbf e_k^T 
+                \end{matrix}
+            \end{bmatrix}
+        \end{align}
+        Each time, We introduce a new edge to the sub tree represented by $(M_D)_{1:k, 1:k}$ by connecting the last column, $a_k$ to a new unvisted vertex, indutively giving that structure. The base case is a $2\times 1$ matrix filled with ones, represnting that one arc connects 2 vertices together. Therefore, the full tree $(M_D)_{1:n, 1:n - 1}$ will look like: 
+        \begin{align}
+            (M_D)_{1:n, 1:n - 1} &= \begin{bmatrix}
+                \{\pm 1\} &   & & \\
+                \{\pm 1\} & \{\pm 1\} & & \\
+                  & \{\pm 1\} & \{\pm 1\} & \\
+                  & & \ddots  &  \ddots\\
+                  & & & \{\pm 1\} & \{\pm 1\} \\
+                  & & &  & \{\pm 1\}
+            \end{bmatrix}
+            \\
+            \implies 
+            M' &= \begin{bmatrix}
+                \{\pm 1\} &   & & \\
+                \{\pm 1\} & \{\pm 1\} & & \\
+                  & \{\pm 1\} & \{\pm 1\} & \\
+                  & & \ddots  &  \ddots\\
+                  & & & \{\pm 1\} & \{\pm 1\} \\
+            \end{bmatrix}
+            \\
+            \implies \text{det}(M') &\in \{\pm 1\}
+        \end{align}
+        Because the diagonal of $M'$ after some permutations are all nonzero, the determinant of $M'$ is nonzero. 
+\section{Problem 2}
+    \subsection{Problem Statement}
+        LP for (50) in the textbook won't work if the objective vector C contains some negative numbers to it. 
+    \subsection{Show Strategies}
+        I aim to reduce the system of LP to another form that is easier too analyze and show that if any $c_{i, j} < 0, (i, j)\in A$, then the dual problem will become unbounded. 
+        \par
+        Let $D = (V, A)$ be a digraph with a set of vertices $V$ and a set of arcs $A$. Let's define $M$ be the incidence matrix of the directed graph $G$. Denotes $M'$ to be the incidence matrix of the digraph. Let $c\in \mathbb R^{|A|}$ be a capacity vector. 
+    \subsection{Proof}
+        The primal formulation of the max cpacity flow is: 
+        \begin{align}
+            \max\left\lbrace
+            \left.
+                \langle \mathbbm 1_{\delta^{\pm}(s)}, x\rangle
+            \right|
+            \mathbf 0 \le x \le c, M'x = \mathbf 0, x\in \mathbb R^{|A|}
+            \right\rbrace
+        \end{align}
+        And after applying duality, we obtain the following dual problem: 
+        \begin{align}
+            \min\left\lbrace
+                \left.\langle c, y\rangle\right|
+                y\ge \mathbf 0, y^T+ z^TM'\ge \mathbbm 1_{\delta^\pm(s)}, z\in \mathbb R^{|V| - 2}, y\in \mathbb R^{|A|}_+
+            \right\rbrace
+        \end{align}
+        Let me expand the system out and get: 
+        \begin{align}
+            & \min \sum_{(i, j)\in A}^{}c_{i,j} y_{i, j}
+            \\
+            & y_{i, j} + z_{i} - z_{j} \ge 0 \quad \forall\; (i, j)\in A: i\neq 0\wedge j\neq 0
+            \\
+            & y_{s, j} - z_j \ge \pm 1 \quad \forall\; (i, j) \in \delta^+(s)\cup \delta^-(s)
+            \\
+            & y_{i, t} + z_i\ge 0 \quad \forall\; j = t \wedge i \neq s
+        \end{align}
+        Here, the variable $y\ge \mathbf 0$, $z$ is free and I can apply the following tricks: 
+        \begin{align}
+            & \forall (i, j)\in A \delta_{i, j} \ge 0
+            \\
+            y_{i, j} &= \delta_{i, j} + \max(z_j - z_i, 0) \quad \forall\; (i, j)\in A: i\neq 0\wedge j\neq 0
+            \\
+            y_{s, j} &= \delta_{s, j} + \max(z_j \pm 1, 0) \quad \forall\; (i, j) \in \delta^+(s)\cup \delta^-(s)
+            \\
+            y_{i, t} &= \delta_{i, t} + \max(-z_i, 0) \quad \forall\; j = t \wedge i \neq s
+        \end{align}
+        Now, we may consider splitting the objective expression for the miniizations: 
+        \begin{align}
+            \sum_{(i, j)\in A}^{}c_{i, j}y_{i, j} &= 
+            \sum_{(i, j)\in A, i\neq s \wedge j \neq t}^{}  
+                c_{i,j}y_{i, j} + 
+            \sum_{(s, j)\in A}^{} c_{s, j} y_{s, j} + 
+            \sum_{(i \neq s, t)\in A}^{}c_{i, t} y_{i, t}
+            \\
+            &= 
+            \sum_{(i, j)\in A, i\neq s \wedge j \neq t}^{}  
+                c_{i, j}(\delta_{i, j} + \max(z_j - z_i, 0))\cdots 
+            \\
+            & + \sum_{(s, j)\in A}^{} c_{s, j} (\delta_{s, j} + \max(z_j \pm 1, 0))\cdots
+            \\
+            & + \sum_{(i \neq s, t)\in A}^{}c_{i, t}(\delta_{i, t} + \max(-z_i, 0))
+        \end{align}
+        Notice that, we can factor out the term $\sum_{(i, j)\in A}c_{i, j}\delta_{i, j}$, in which case if any of the $c_{i, j}\le 0$, we can make it unbounded for any feasible solution of $y, z$. 
+        
+
+\section{Problem 3}
+
+\section{Problem 4}
+
+
+\end{document}
