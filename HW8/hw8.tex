@@ -98,56 +98,76 @@
         \end{remark}
 
     \subsection{Proof Direction $\implies$}
-        WLOG, let $M'$ be $(M_D)_{1:n - 1, 1:n - 1}$, a sub-matrix that takes all vertices except $v_n$, and it takes the first $(n - 1)$ columns of $M_D$ too.\footnote{We can do this because we can get the tree first and then permute columns and rows of $M_D$ so that the first $(n - 1)$ arcs are in the tree. } 
+        WLOG suppose that $(M_D)_{:, 1:(n - 1)}$ is an incidence matrix of a spanning tree so that the first $(n - 1)$ arcs spans a spanning tree in $D$. Further assuming that $M' = (M_D)_{2:n, 1:(n - 1)}$ which is $M_D$ but without the first row. ($v_1$ is not a vertex in our tree... and it's arbitrary.)
         \par
-        $M'$'s columns represents arcs that connects all the vertices because they form a spanning tree. Therefore, for all rows of $M'$, it has at least one $\pm 1$ on it because they are the first $n - 1$ vertices in the graph, connected by all first $n - 1$ arcs in the graph, therefore it's possible to permute the matrix such that all it's diagonal elements are $\in \{\pm 1\}$. Let's reorder the columns of $M'$ allows for the diagonal to be all $\in \{\pm 1\}$
-        \par
-        Moreover, tree has the proprty that we can remove one edge from the tree and it will always connect to a new vertex in the original graph.\footnote{The arc connecting to $v_n$ is removed as the last arc! This is absolutely doable.} Let's order the vertices the same way as how they are removed! That implies the following structure about the matrix $M'$: 
+        That vertex in the first row must be connected to a series of arcs: $\{a_{k_1}, a_{k_2}, \cdots, a_{k_l}\}$. Each of those must connect to a different vertex: $v_1\not\in\{v_{j_1}, v_{j_2}, \cdots, v_{j_l}\}$, so it looks like this: 
         \begin{align}
-            (M_D)_{1:k, 1:k + 1}
-            &= 
+            (M_D)_{\{v_1\}\cup\{v_{j_1}, v_{j_2}, \cdots, v_{j_l}\}, \{k_1, k_2, \cdots, k_l\}}
             \begin{bmatrix}
-                \underbrace{\begin{bmatrix}
-                    \{\pm 1\} &   & & \\
-                    \{\pm 1\} & \{\pm 1\} & & \\
-                      & \{\pm 1\} & \{\pm 1\} & \\
-                      & & \ddots  &  \ddots\\
-                      & & & \{\pm 1\} & \{\pm 1\}
-                \end{bmatrix}}_{(M_D)_{1:k, 1:k}}
+                \{\pm 1\}_1 &\{\pm 1\}_2  & \cdots& \{\pm 1\}_l
+                \\
+                \{\mp 1\}_1 &             &       & 
+                \\
+                &\{\mp 1\}_2     &       & 
+                \\
+                & &\ddots &
+                \\
+                & & & \{\mp 1\}_l
+            \end{bmatrix}
+            \\
+            \text{let: }T_l := (M_D)_{\{v_{j_1}, v_{j_2}, \cdots, v_{j_l}\}, \{k_1, k_2, \cdots, k_l\}} 
+            = \begin{bmatrix}
+                \{\mp 1\}_1 &             &       & 
+                \\
+                &\{\mp 1\}_2     &       & 
+                \\
+                & &\ddots &
+                \\
+                & & & \{\mp 1\}_l
+            \end{bmatrix}
+        \end{align}
+        Observe that, $T_l$ IS A SUBMATRIX OF $M'$ if $T_l = M'$ then we are DONE because it's a diagonal matrix with nonzeros on its diagonal, because $M'$ is a tree and $T_l$ is a sub tree of $M'$, both with $v_1$ missing, I can include another arc and a new vertex incidence to any existing vertex and this new vertex to get $T_{l + 1}$: 
+        \begin{align}
+            T_{l + 1} &= 
+            \begin{bmatrix}
+                T_l &  
+                \begin{matrix}
+                    0 \\ \vdots \\ \pm 1 \\ \vdots \\ 0
+                \end{matrix}
                 \\
                 \begin{matrix}
-                    \pm \mathbf e_k^T 
-                \end{matrix}
+                    0 & \cdots & 0
+                \end{matrix} & \mp 1
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                T_k & \pm \mathbf e_{i}^{(l)}
+                \\
+                \mathbf 0 & \mp 1
             \end{bmatrix}
         \end{align}
-        Each time, We introduce a new edge to the sub tree represented by $(M_D)_{1:k, 1:k}$ by connecting the last column, $a_k$ to a new unvisted vertex, indutively giving that structure. The base case is a $2\times 1$ matrix filled with ones, represnting that one arc connects 2 vertices together. Therefore, the full tree $(M_D)_{1:n, 1:n - 1}$ will look like: 
+        Where, we introduce a new $\mp 1$ at the bottom right corner, and a new column to $T_1$ that has exactly one nonzero element in it. This is true because if we haven includes all the arcs yet, then there exists some new arcs that is incidence to existing vertices and it connects to a new vertex that is not in the tree. 
+        \par
+        Notice that this argument can be applied inductively, we assume that $T_k$ is upper triangular (Base case $T_l$ already is), then the induction holds for all $k< n - 1$, giving us: 
         \begin{align}
-            (M_D)_{1:n, 1:n - 1} &= \begin{bmatrix}
-                \{\pm 1\} &   & & \\
-                \{\pm 1\} & \{\pm 1\} & & \\
-                  & \{\pm 1\} & \{\pm 1\} & \\
-                  & & \ddots  &  \ddots\\
-                  & & & \{\pm 1\} & \{\pm 1\} \\
-                  & & &  & \{\pm 1\}
+            T_{k + 1} &= 
+            \begin{bmatrix}
+                T_k &  
+                \begin{matrix}
+                    0 \\ \vdots \\ \pm 1 \\ \vdots \\ 0
+                \end{matrix}
+                \\
+                \begin{matrix}
+                    0 & \cdots & 0
+                \end{matrix} & \mp 1
             \end{bmatrix}
-            \\
-            \implies 
-            M' &= \begin{bmatrix}
-                \{\pm 1\} &   & & \\
-                \{\pm 1\} & \{\pm 1\} & & \\
-                  & \{\pm 1\} & \{\pm 1\} & \\
-                  & & \ddots  &  \ddots\\
-                  & & & \{\pm 1\} & \{\pm 1\} \\
-            \end{bmatrix}
-            \\
-            \implies \text{det}(M') &\in \{\pm 1\}
         \end{align}
-        Because the diagonal of $M'$ after some permutations are all nonzero, the determinant of $M'$ is nonzero. 
+        The induction completes with $k = n - 2$, which gives us $T_k = M'$, and $T_k$ is upper triangular with only $\pm 1$ on the diagonal, therefore $\text{det}(T_k) = \pm 1$.
 \section{Problem 2}
     \subsection{Problem Statement}
         LP for (50) in the textbook won't work if the objective vector C contains some negative numbers to it. 
     \subsection{Show Strategies}
-        I aim to reduce the system of LP to another form that is easier too analyze and show that if any $c_{i, j} < 0, (i, j)\in A$, then the dual problem will become unbounded. 
+        I claim to reduce the system of LP  for the Dual of Maxflow to another form that is easier too analyze and show that if any $c_{i, j} < 0, (i, j)\in A$, then the dual problem will become unbounded. 
         \par
         Let $D = (V, A)$ be a digraph with a set of vertices $V$ and a set of arcs $A$. Let's define $M$ be the incidence matrix of the directed graph $G$. Denotes $M'$ to be the incidence matrix of the digraph. Let $c\in \mathbb R^{|A|}$ be a capacity vector. 
     \subsection{Proof}
@@ -177,9 +197,9 @@
             \\
             & y_{i, t} + z_i\ge 0 \quad \forall\; j = t \wedge i \neq s
         \end{align}
-        Here, the variable $y\ge \mathbf 0$, $z$ is free and I can apply the following tricks: 
+        Here, the variable $y\ge \mathbf 0$, $z$ is free and I can apply the trick of introducing a new decision variable and a max function. 
         \begin{align}
-            & \forall (i, j)\in A \delta_{i, j} \ge 0
+            & \forall (i, j)\in A: \delta_{i, j} \ge 0
             \\
             y_{i, j} &= \delta_{i, j} + \max(z_j - z_i, 0) \quad \forall\; (i, j)\in A: i\neq 0\wedge j\neq 0
             \\
@@ -203,10 +223,50 @@
             \\
             & + \sum_{(i \neq s, t)\in A}^{}c_{i, t}(\delta_{i, t} + \max(-z_i, 0))
         \end{align}
-        Notice that, we can factor out the term $\sum_{(i, j)\in A}c_{i, j}\delta_{i, j}$, in which case if any of the $c_{i, j}\le 0$, we can make it unbounded for any feasible solution of $y, z$. 
-        
+        Notice that, we can factor out the term $\sum_{(i, j)\in A}c_{i, j}\delta_{i, j}$, in which case if any of the $c_{i, j}\le 0$, we can make it unbounded for any feasible solution of $y, z$ by increasing values of $\delta$ indefinitely. 
+    \subsection{An Example}
+        There is no example for Maxflow, only the Mincut, because the primal is infeasible due to the constraints $x\ge \mathbf 0$. The polytope is empty. 
+        \par
+        Consider a graph that has only $s \underset{c <  0}{\longrightarrow} t$ to it, then the dual is: $\min\{cy: y \ge \mathbf 0 , y \ge 1\}$, decision variable $z$ is gone because the graph only has $\{s, t\}$ as the vertex set. Obivously it's unbounded when $c < 0$. 
+        \begin{remark}
+            If people want to add negative capacity to model flow in reverse direction, please consider adding parallel arcs in opposite direction with positive capacity between those 2 vertices instead.
+        \end{remark}
 
 \section{Problem 3}
+    \subsection{Problem Statement}
+        Explain why the model in Application 4.4 on pp 73 works. 
+    \subsection{The Setting up of The Graph}
+        Putting the citites having surplus, deficit into a bipartite directed graph $D = (U\dot\cup W, A)$. Let $U$ be the cities of curplus and $V$ be the cities of deficit in freighters. Connects every $u\in U$ to every $w\in V$ by an arc with infinite capacity, going from $U$ to $W$, associate cost with each arc: $(u_i, w_j)$ by the distance between these 2 cities of surplus and deficit. Let $k: A \mapsto \mathbb R_+$ be our cost functions, and $c: A\mapsto \mathbb R_+$ be our capacity function. Mathematically: 
+        \begin{align}
+            & U:: \text{FreightersSurplus Cities}
+            \\
+            & W::\text{Freighers Deficit Cities}
+            \\
+            & \forall u\in U, w\in W
+            \\
+            & c((u, w)) := +\infty
+            \\
+            & k((u, w)) := \text{min\_distance}(\text{city: u}, \text{city v})
+        \end{align}
+        \par
+        Next, we introduce auxilary vertex $s, t$ as the source and the sink vertex for the flow. Construct arcs from $s$ to all vertices in $U$, cities with surplus, with capacity equals to the empty freighters in that each city. $(s, u)\in E, u\in U$, $c((s, v)) = \sigma$, connecting each vertex $w\in W$, cities with deficit in freighters to $t$, with an edge $(w, t)$ with a capacity equals to the deficit of freighters for that city: $\nu$. 
+        \begin{align}
+            & c((s, u)) := \sigma_{s, u}, k((s, u)) := 0 \quad \forall u \in U
+            \\
+            & c((w, t)) := \nu_{w, t}, k((w, t)) := 0\quad \forall w\in W
+        \end{align}
+        \par
+        Take note that from the original problem, the total number of deficit among all cities and the surplus adds up to zero. A maximum flow will have a flow value equals to the total number of surplus/deficit among all cities: $\text{value}(f) = \sum_{i= 1}^{|U|}u_i = \sum_{i = 1}^{|W|}\nu_i$. The Mincut won't include any arcs going between $U, W$ because they have infinite capacity. This implies that for all $u\in U$, the flow cutting out of it equals the total surplus of that city. 
+        \par
+        A maximum flow from the cities of surplus to deficit is a fixed flow problem, and to minimize the costs will minimizes the distance travelled perunit freighters. Let's just stick with real numbers for now which (Cause in the real world, we can't cut a frieghters and send it to different cities).
+    \subsection{Why Bipartite Graph, Why Only Transport Between Cities of Freighters Surplus and Deficit? }
+        Triangle inequality, sending some freighters from city $u_i$ to $u_j$ then to $w_k$ is always longer than sending directly from $u_i$ to $w_k$.\footnote{Triangule Inequality holds for noneuclidean geometry: The earth surface.}
+    \subsection{Why is Maxflow Best Routing?}
+        
+        
+
+        
+        
 
 \section{Problem 4}
 
