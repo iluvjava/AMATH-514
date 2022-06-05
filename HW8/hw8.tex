@@ -236,7 +236,7 @@
     \subsection{Problem Statement}
         Explain why the model in Application 4.4 on pp 73 works. 
     \subsection{The Setting up of The Graph}
-        Putting the citites having surplus, deficit into a bipartite directed graph $D = (U\dot\cup W, A)$. Let $U$ be the cities of curplus and $V$ be the cities of deficit in freighters. Connects every $u\in U$ to every $w\in V$ by an arc with infinite capacity, going from $U$ to $W$, associate cost with each arc: $(u_i, w_j)$ by the distance between these 2 cities of surplus and deficit. Let $k: A \mapsto \mathbb R_+$ be our cost functions, and $c: A\mapsto \mathbb R_+$ be our capacity function. Mathematically: 
+        Putting the citites having surplus, deficit into a bipartite directed graph $D = (U\dot\cup W, A)$. Let $U$ be the cities of curplus and $W$ be the cities of deficit in freighters. Connects every $u\in U$ to every $w\in V$ by an arc with infinite capacity, going from $U$ to $W$, associate cost with each arc: $(u_i, w_j)$ by the shortest distance between these 2 cities of surplus and deficit. Let $k: A \mapsto \mathbb R_+$ be our cost function, and $c: A\mapsto \mathbb R_+$ be our capacity function. Mathematically: 
         \begin{align}
             & U:: \text{FreightersSurplus Cities}
             \\
@@ -249,26 +249,49 @@
             & k((u, w)) := \text{min\_distance}(\text{city: u}, \text{city v})
         \end{align}
         \par
-        Next, we introduce auxilary vertex $s, t$ as the source and the sink vertex for the flow. Construct arcs from $s$ to all vertices in $U$, cities with surplus, with capacity equals to the empty freighters in that each city. $(s, u)\in E, u\in U$, $c((s, v)) = \sigma$, connecting each vertex $w\in W$, cities with deficit in freighters to $t$, with an edge $(w, t)$ with a capacity equals to the deficit of freighters for that city: $\nu$. 
+        Next, we introduce auxilary vertex $s, t$ as the source and the sink vertex for the flow. Construct arcs from $s$ to all vertices in $U$, cities with surplus, with capacity equals to the empty freighters in that each city. $(s, u)\in E, u\in U$, $c((s, u)) = \sigma_u$, connecting each vertex $w\in W$, cities with deficit in freighters to $t$, with an edge $(w, t)$ with a capacity equals to the deficit of freighters for that city: $\nu$. 
         \begin{align}
             & c((s, u)) := \sigma_{s, u}, k((s, u)) := 0 \quad \forall u \in U
             \\
             & c((w, t)) := \nu_{w, t}, k((w, t)) := 0\quad \forall w\in W
         \end{align}
         \par
-        Take note that from the original problem, the total number of deficit among all cities and the surplus adds up to zero. A maximum flow will have a flow value equals to the total number of surplus/deficit among all cities: $\text{value}(f) = \sum_{i= 1}^{|U|}u_i = \sum_{i = 1}^{|W|}\nu_i$. The Mincut won't include any arcs going between $U, W$ because they have infinite capacity. This implies that for all $u\in U$, the flow cutting out of it equals the total surplus of that city. 
+        Take note that from the original problem, the total number of deficit among all cities and the surplus adds up to zero. A maximum flow will have a flow value equals to the total number of surplus/deficit among all cities: $\text{value}(f) = \sum_{i= 1}^{|U|}\sigma_i = \sum_{i = 1}^{|W|}\nu_i$. The Mincut won't include any arcs going between $U, W$ because they have infinite capacity. This implies that for all $u\in U$, the flow cutting out of it equals the total surplus of that city, it also means that the flow coming out of each cities $w\in W$ equals to the defecit $\nu_w$. Flow $f$ is also going to be extreme because it's the minimum cost flow. 
+        \par
+        Because flows in equals flow out therefore all the freighters in $U$ are routed to $W$, and all edges connecting $s, U$ and $W, t$ are saturated, meaning that the flow takes away all surplus of freighters in $U$ to $W$ and filled up all the defecit. 
         \par
         A maximum flow from the cities of surplus to deficit is a fixed flow problem, and to minimize the costs will minimizes the distance travelled perunit freighters. Let's just stick with real numbers for now which (Cause in the real world, we can't cut a frieghters and send it to different cities).
     \subsection{Why Bipartite Graph, Why Only Transport Between Cities of Freighters Surplus and Deficit? }
         Triangle inequality, sending some freighters from city $u_i$ to $u_j$ then to $w_k$ is always longer than sending directly from $u_i$ to $w_k$.\footnote{Triangule Inequality holds for noneuclidean geometry: The earth surface.}
     \subsection{Why is Maxflow Best Routing?}
+        Because given any transportation function $g: A\mapsto \mathbb R_+$ for the full graph of cities: $G = (V, A)$, we can construct the loss function for each vertex: $\text{loss}(v):=-\sum_{a\in \delta^+(v)}^{} g(a) + \sum_{a \in \delta^-(v)}^{}g(a)$, and we minimize: $\text{loss}(V) := \sum_{v\in V}^{}|\text{loss}(v)|$. 
+        \par
+        Then, we can define a new bipartite graph where $U$ corresponds to all $v$ such that $\text{loss}(v) > 0$, and $W$ corresonds to all $v$ such that $\text{loss}(v) < 0$, and we follows the exact same setup as application 4.4. 
+        \par
+        The solution will then reduce $\text{loss}(V)=0$, which gives us a circulations. And that circulations will have least amount of cost for transporting extra empty freighters between cities. 
         
-        
-
-        
-        
-
 \section{Problem 4}
+    This is the table: 
+    $$
+    \begin{array}{|l|l|l|l|l|l|l|l|l|l|}
+        \hline & \text { Team } & \text { Wins } & \text { Left to Play } & \text { vs. A } & \text { vs. B } & \text { vs. C } & \text { vs. D } & \text { vs. E } \\
+        \hline \text { A } & \text { Houston Astros } & 75 & 28 & * & 3 & 8 & 7 & 3 & \\
+        \hline \text { B } & \text { Los Angeles Angels } & 71 & 28 & 3 & * & 2 & 7 & 4 & \\
+        \hline \text { C } & \text { Oakland Athletics } & 69 & 27 & 8 & 2 & * & 0 & 0 & \\
+        \hline \text { D } & \text { Seattle Mariners } & 63 & 27 & 7 & 7 & 0 & * & 0 & \\
+        \hline \text { E } & \text { Texas Rangers } & 49 & 27 & 3 & 4 & 0 & 0 & * & \\
+        \hline
+        \end{array}
+    $$
+    Unfortunately, Texas Rangers can't win with first place anymore. Assuming that Texas Rangers (Team E) wins all the remaining races, they they had $49 + 27 = 76$ wins. Sin Team E already won all, they thre is no matches between any other teams with team $E$ any more. 
+    \par
+    Other teams: $A, B, C, D$ are left to play with each other for certainty for the remaining seasons. $A$ has  AT LEAST $18$ unfinished races, B has $12$, C has $10$ and D has 14. How many winning will happen for races between: A, B, C, D in total? It's: 
+    \begin{align}
+        (75 + 71 + 69 + 63) + (18 + 12 + 10 + 14) = 332
+    \end{align}
+    Ok, on average, how many are wins these 4 teams getting in total? It's: $332/4 = 83$. Ok, that means the team of most wining among A, B, C, D is wining at least $83$ times. Team E won't get first place for certainty, because team E can't win more than $75$. 
+    \par
+    More matches and races will only add more to these 3 teams, making the higher even higher, and maximum of winning team E can get is 75, which is lower than 83. 
 
 
 \end{document}

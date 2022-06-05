@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1652833001 "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.pdf" "hw7" 1652833002
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.aux" 1652833002 2362 525f25df189ccf86106232166c52230d ""
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.tex" 1652833001 12652 6de9454370420136b0f740007da5a83a ""
+["pdflatex"] 1652833443 "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.pdf" "hw7" 1652833469
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.aux" 1652833444 2362 2f1dfc72da8a6ebb9ba2f9053d964f7f ""
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.tex" 1652833443 13803 463e4771cb98a867345e09605c0233ac ""
   "/Users/hongdali/Library/texlive/2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk" 1652209795 8424 d1539fe1cc54fd79f1d3894829b2d910 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -144,14 +144,15 @@
   "Settled Results Ready to Transfer-5.jpg" 1652849600 592278 3912f24e6f2eeda4365e69c225694817 ""
   "Settled Results Ready to Transfer-6.jpg" 1652849600 622512 28402ec5e3aac56374cac34c7cc1b9d6 ""
   "Settled Results Ready to Transfer-7.jpg" 1652849600 611167 59ec82e12d7ebf1d56d7e14602fe1559 ""
-  "hw7.aux" 1652833002 2362 525f25df189ccf86106232166c52230d "pdflatex"
-  "hw7.out" 1652833002 1621 c326be2322d95a6a9303ebf72dfb84fd "pdflatex"
-  "hw7.tex" 1652833001 12652 6de9454370420136b0f740007da5a83a ""
+  "hw7.aux" 1652833444 2362 2f1dfc72da8a6ebb9ba2f9053d964f7f "pdflatex"
+  "hw7.out" 1652833444 1621 c326be2322d95a6a9303ebf72dfb84fd "pdflatex"
+  "hw7.tex" 1652833443 13803 463e4771cb98a867345e09605c0233ac ""
+  "pathological.jpeg" 1652832102 332018 1088eab8cc284e5245366794ac592afc ""
   "reduced_graph.jpeg" 1652810222 239472 7130676a5ef4202bce529cb80141b21a ""
   (generated)
+  "hw7.pdf"
+  "hw7.aux"
+  "hw7.log"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.pdf"
   "hw7.out"
-  "hw7.aux"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.log"
-  "hw7.pdf"
-  "hw7.log"

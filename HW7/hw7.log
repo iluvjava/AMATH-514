@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  17 MAY 2022 17:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.17)  17 MAY 2022 17:24
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -612,23 +612,29 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 143.
 
-[6] [7] [8] (/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.aux)
+[6] [7]
+<pathological.jpeg, id=119, 2582.64874pt x 1003.75pt>
+File: pathological.jpeg Graphic file (type jpg)
+<use pathological.jpeg>
+Package pdftex.def Info: pathological.jpeg  used on input line 219.
+(pdftex.def)             Requested size: 341.43306pt x 132.69757pt.
+ [8] [9 </Users/hongdali/Desktop/repos/AMATH-514/HW7/pathological.jpeg>] (/Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.aux)
 Package rerunfilecheck Info: File `hw7.out' has not changed.
 (rerunfilecheck)             Checksum: C326BE2322D95A6A9303EBF72DFB84FD;1621.
  ) 
 Here is how much of TeX's memory you used:
- 13313 strings out of 478994
- 195190 string characters out of 5858183
+ 13324 strings out of 478994
+ 195372 string characters out of 5858183
  550419 words of memory out of 5000000
- 30524 multiletter control sequences out of 15000+600000
+ 30529 multiletter control sequences out of 15000+600000
  420383 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  81i,15n,89p,615b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc} </Users/hongdali/Library/texlive/2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb>
-Output written on /Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.pdf (8 pages, 2264358 bytes).
+Output written on /Users/hongdali/Desktop/repos/AMATH-514/HW7/hw7.pdf (9 pages, 2599348 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
- 44 named destinations out of 1000 (max. 500000)
- 109 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 212 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 

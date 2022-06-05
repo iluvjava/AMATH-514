@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1653519118 "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.pdf" "hw8" 1653519119
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.aux" 1653519119 2845 acd745c80fe3d4e7163367d87f3a7c90 ""
-  "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.tex" 1653519117 16701 b0cd9c8adddbf3d2e3ef9f18284aa968 ""
+["pdflatex"] 1653533145 "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.tex" "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.pdf" "hw8" 1653533146
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.aux" 1653533146 2845 acd745c80fe3d4e7163367d87f3a7c90 ""
+  "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.tex" 1653533145 19626 510ff15c7bdac445b8e01ccd4e79336c ""
   "/Users/hongdali/Library/texlive/2021/texmf-var/fonts/pk/ljfour/public/bbm/bbm12.600pk" 1652209795 8424 d1539fe1cc54fd79f1d3894829b2d910 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -148,13 +148,13 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1639775816 2724744 21efffca8bfeec89977fe7c6aafcfaa8 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "hw8.aux" 1653519119 2845 acd745c80fe3d4e7163367d87f3a7c90 "pdflatex"
-  "hw8.out" 1653519119 2415 c64e11583e1fa7d8bb441568fd614f7d "pdflatex"
-  "hw8.tex" 1653519117 16701 b0cd9c8adddbf3d2e3ef9f18284aa968 ""
+  "hw8.aux" 1653533146 2845 acd745c80fe3d4e7163367d87f3a7c90 "pdflatex"
+  "hw8.out" 1653533146 2415 c64e11583e1fa7d8bb441568fd614f7d "pdflatex"
+  "hw8.tex" 1653533145 19626 510ff15c7bdac445b8e01ccd4e79336c ""
   (generated)
   "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.log"
-  "hw8.aux"
   "/Users/hongdali/Desktop/repos/AMATH-514/HW8/hw8.pdf"
+  "hw8.aux"
   "hw8.out"
   "hw8.log"
   "hw8.pdf"

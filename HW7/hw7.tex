@@ -211,7 +211,26 @@
         Next, define the cost function $k(a) = -w(E(a))$, the cost function is just the negative weight. Since w is $\mathbb R_+$, then $k$ is $\mathbb R_-$. Minimizing the cost among all flow with a flow of $|M|$ will correspond to maximumizing the weight for all matching on $G$ with cardinality $|M|$. The solution with maximum weight must has a flow value the same as a matching with max cardinality, this is proved in \hyperref[lemma:1]{lemma \ref*{lemma:1}}, therefore, the minimum cost among all flow must be a flow with a value $|M|$. 
 
 \section{Problem 4}
-    
+    Justify the statement on page 65 of Schrijver's notes that, with a bad choice of flow-augmenting paths, the Ford-Fulkerson uses $2*10^k$ iterations of the flow-augmenting algorithm to find an s-t flow of maximal value in the graph Figure 4.3. (To do this, you should give an explicit sequence of flow-augmenting paths.)
+    \par
+    The graph from page 65 is: 
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=12cm]{pathological.jpeg}
+    \end{figure}
+    \par
+    One strategy of choosing the sequences of flow-augmenting path is to always choose include the edges with the least capacity. In this case the flow must path through the arcs $(v_1, v_2), (v_2, v_1)$. The sequence of path would be: 
+    \begin{align}
+        P_1 &= s-v_1-v_2-t
+        \\
+        P_2 &= s-v_2-v_1-t
+        \\
+        \vdots 
+        \\
+        P_{2\times 10^k} &= s-v_1-v_2-t
+    \end{align}
+    And each time we send a flow of exactly 1, therefore we need $2\times 10^k$ to saturate the arcs in $\delta^-(t)$. The first flow path create $f(a^{-1}) = (v_2, v_2)$ on the residual graph, and the path $P_2$ set it to zero, and the cycle repeats. 
+
         
         
 \end{document}
